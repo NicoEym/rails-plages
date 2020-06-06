@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_193109) do
+ActiveRecord::Schema.define(version: 2020_06_06_205905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2020_06_06_193109) do
     t.string "mobile"
     t.bigint "rank_id"
     t.string "avatar_url"
+    t.string "firstname"
+    t.string "lastname"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["rank_id"], name: "index_users_on_rank_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

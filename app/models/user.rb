@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :rank
-  belongs_to :teams
+  # has_many :teams
 end
