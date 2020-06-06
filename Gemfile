@@ -39,6 +39,7 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
+gem "pundit"
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
