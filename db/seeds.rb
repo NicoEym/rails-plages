@@ -25,34 +25,34 @@ Calendar.create(day: dates)
 
 rank = Rank.create(name: "Chef de poste")
 
-4.times do
-  user = User.new(
+# 4.times do
+#   user = User.new(
 
-    firstname:  Faker::Name.first_name,
-    lastname: Faker::Name.last_name,
-    mobile: Faker::PhoneNumber.cell_phone,
-    email: Faker::Internet.email,
-    rank: rank,
-    avatar_url: Faker::Avatar.image,
-    password:  'valid_password',
-    password_confirmation: 'valid_password'
-  )
-  user.save!
-end
+#     firstname:  Faker::Name.first_name,
+#     lastname: Faker::Name.last_name,
+#     mobile: Faker::PhoneNumber.cell_phone,
+#     email: Faker::Internet.email,
+#     rank: rank,
+#     avatar_url: Faker::Avatar.image,
+#     password:  'valid_password',
+#     password_confirmation: 'valid_password'
+#   )
+#   user.save!
+# end
 
 
-rank = Rank.create(name: "Equipier")
-8.times do
-  user = User.new(
+# rank = Rank.create(name: "Equipier")
+# 8.times do
+#   user = User.new(
 
-    firstname:    Faker::Name.first_name ,
-    lastname: Faker::Name.last_name,
-    mobile: Faker::PhoneNumber.cell_phone,
-    email: Faker::Internet.email,
-    rank: rank,
-    avatar_url: Faker::Avatar.image,
-    password:  'valid_password',
-    password_confirmation: 'valid_password'
-  )
-  user.save!
-end
+#     firstname:    Faker::Name.first_name ,
+#     lastname: Faker::Name.last_name,
+#     mobile: Faker::PhoneNumber.cell_phone,
+#     email: Faker::Internet.email,
+#     rank: rank,
+#     avatar_url: Faker::Avatar.image,
+#     password:  'valid_password',
+#     password_confirmation: 'valid_password'
+#   )
+#   user.save!
+# end

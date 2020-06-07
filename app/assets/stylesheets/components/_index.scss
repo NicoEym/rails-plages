@@ -2,3 +2,75 @@
 @import "alert";
 @import "avatar";
 @import "navbar";
+@import "banner";
+@import "button";
+@import "form";
+
+.container {
+  min-height:100vh;
+  border-radius: 0.5em;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 1em;
+ }
+
+
+ .container-home {
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    flex-direction: center;
+}
+
+
+
+a { color: inherit;
+  text-decoration: none;
+  &:hover {
+  color: inherit;
+  text-decoration: none;
+  }
+}
+
+.space_between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.space_around {
+  justify-content: space-around;
+}
+
+.width100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.my-row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.padding1 {
+  padding: 1em;
+}
+
+.margin1 {
+  margin: 1em;
+}
+
+.shadow-boxing {
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.border-radius05 {
+  border-radius: 0.5em;
+}
+
+.marginb {
+  margin-bottom: 1em;
+}
