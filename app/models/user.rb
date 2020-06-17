@@ -6,5 +6,11 @@ class User < ApplicationRecord
 
   has_one :rank
 
+
+
+
+  def full_name
+    "#{firstname} #{lastname}"
+  end
 end
 

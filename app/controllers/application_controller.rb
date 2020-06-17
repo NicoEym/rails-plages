@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :mobile, :avatar_url])
     end
 
+     def after_sign_up_path_for(resource)
+    "/calendars/"# <- Path you want to redirect the user to.
+  end
+
+  def after_sign_in_path_for(resource)
+    "/calendars/"# <- Path you want to redirect the user to.
+  end
+
 end
