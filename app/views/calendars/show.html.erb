@@ -1,6 +1,12 @@
-<h1>  <%=@date %></h1>
+<h1>  <%=@date.day %></h1>
 
 <% @beaches.each do |beach| %>
   <p><%=beach.name%></p>
+  <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),  new_calendar_beach_team_path(@date, beach) %>
+
+
+
+
+
 
   <% end %>

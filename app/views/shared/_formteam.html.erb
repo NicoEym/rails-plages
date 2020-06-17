@@ -1,0 +1,22 @@
+<div class="log-form col-xs-12 col-md-4">
+  <%= simple_form_for [@date, @beach, @team]  do |f| %>
+
+        <% if current_page?(controller: 'teams', action: 'new')  %>
+          <h2>Créer l'équipe plage <%= @beach.name%></h2>
+        <% else %>
+          <h2>Modifier l'équipe <%= @beach.name%></h2>
+        <% end %>
+        <h3>Chef de poste:</h3>
+        <%= f.select :user_id, options_from_collection_for_select(User.where(rank_id: @leader.id), :id, :full_name),
+                    required: true,
+                    input_html: { autocomplete: "Perfil" } %>
+        <h3>Equipier(s): </h3>
+        <% @team_mate_number.times do %>
+          <%= f.select :user_id, options_from_collection_for_select(User.where(rank_id: @team_mate.id), :id, :full_name),
+                    required: true,
+                    input_html: { autocomplete: "Perfil" } %>
+        <% end %>
+        <%= f.submit "Créer" %>
+
+  <% end %>
+</div>
