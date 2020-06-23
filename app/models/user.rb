@@ -5,9 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one :rank
-
-
-
+  has_many :teams, through: :team_lifeguards
 
   def full_name
     "#{firstname} #{lastname}"

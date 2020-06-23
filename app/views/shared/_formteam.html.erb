@@ -1,7 +1,7 @@
 <div class="log-form col-xs-12 col-md-4">
-  <%= simple_form_for [@date, @beach, @team]  do |f| %>
+  <%= simple_form_for [@date, @beach, @team, @team_lifeguard]  do |f| %>
 
-        <% if current_page?(controller: 'teams', action: 'new')  %>
+        <% if current_page?(controller: 'team_lifeguards', action: 'new')  %>
           <h2>Créer l'équipe plage <%= @beach.name%></h2>
         <% else %>
           <h2>Modifier l'équipe <%= @beach.name%></h2>

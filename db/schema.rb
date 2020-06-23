@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_205905) do
+ActiveRecord::Schema.define(version: 2020_06_23_004736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,15 +35,22 @@ ActiveRecord::Schema.define(version: 2020_06_06_205905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "team_lifeguards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_team_lifeguards_on_team_id"
+    t.index ["user_id"], name: "index_team_lifeguards_on_user_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.bigint "beach_id"
     t.bigint "calendar_id"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["beach_id"], name: "index_teams_on_beach_id"
     t.index ["calendar_id"], name: "index_teams_on_calendar_id"
-    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,13 +66,15 @@ ActiveRecord::Schema.define(version: 2020_06_06_205905) do
     t.string "avatar_url"
     t.string "firstname"
     t.string "lastname"
+    t.boolean "admin", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["rank_id"], name: "index_users_on_rank_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "team_lifeguards", "teams"
+  add_foreign_key "team_lifeguards", "users"
   add_foreign_key "teams", "beaches"
   add_foreign_key "teams", "calendars"
-  add_foreign_key "teams", "users"
   add_foreign_key "users", "ranks"
 end
