@@ -2,11 +2,12 @@
 
 <% @beaches.each do |beach| %>
   <p><%=beach.name%></p>
-  <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),  new_calendar_beach_team_path(@date, beach) %>
-
-
-
-
+  <% team = Team.find_by(calendar: @date, beach: beach) %>
+  <% if team.nil?  %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),   {:controller => "teams", :action => "create", :calendar_id => @date.id, :beach_id => beach.id} , :method=>:post %>
+    <% else %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i>Modifier léquipe'),   edit_calendar_beach_team_team_lifeguard_path(team.calendar, team.beach, team) %>
+  <% end %>
 
 
   <% end %>
