@@ -1,4 +1,4 @@
-<h1>  <%=@date.day %></h1>
+<h1><%=@date.day %></h1>
 
 <% @beaches.each do |beach| %>
   <p><%=beach.name%></p>
@@ -6,8 +6,12 @@
   <% if team.nil?  %>
     <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),   {:controller => "teams", :action => "create", :calendar_id => @date.id, :beach_id => beach.id} , :method=>:post %>
     <% else %>
+      <% lifeguards = TeamLifeguard.where(team: team) %>
+       <% lifeguards.each do |lifeguard| %>
+          <%= lifeguard.user.full_name %>
+          <%= image_tag lifeguard.user.avatar_url %>
+       <% end%>
     <%= link_to raw('<i class="fas fa-plus-circle"></i>Modifier léquipe'),   edit_calendar_beach_team_team_lifeguard_path(team.calendar, team.beach, team) %>
+    <%= link_to raw('<i class="fas fa-plus-circle"></i>Supprimer léquipe'),   calendar_beach_team_path(team.calendar, team.beach, team), method: :delete %>
   <% end %>
-
-
-  <% end %>
+<% end %>
