@@ -20,6 +20,13 @@ class TeamsController < ApplicationController
     end
   end
 
+  def destroy
+    @team = Team.find(params[:id])
+    date = @team.calendar
+    @team.destroy
+    redirect_to calendar_path(date.id)
+  end
+
   private
 
   def team_params

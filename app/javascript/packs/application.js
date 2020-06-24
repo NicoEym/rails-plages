@@ -27,9 +27,16 @@ console.log('Hello World from Webpacker')
 import "bootstrap";
 
 // Internal imports, e.g:
+import { addLifeguardsToTeam } from '../components/add_lifeguards_to_team';
 // import { initSelect2 } from '../components/init_select2';
+
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });
+
+
+
+
+addLifeguardsToTeam();

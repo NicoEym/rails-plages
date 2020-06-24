@@ -1,6 +1,5 @@
 class CalendarsController < ApplicationController
 
-
   def index
     @dates = Calendar.all
   end
@@ -10,5 +9,4 @@ class CalendarsController < ApplicationController
     @beaches = Beach.all
     @teams = Team.find_by(calendar: @date)
   end
-
 end
