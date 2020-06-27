@@ -28,6 +28,7 @@ import "bootstrap";
 
 // Internal imports, e.g:
 import { addLifeguardsToTeam } from '../components/add_lifeguards_to_team';
+import { enableButtonSubmit } from '../components/enable_button_submit';
 // import { initSelect2 } from '../components/init_select2';
 
 
@@ -38,5 +39,5 @@ document.addEventListener('turbolinks:load', () => {
 
 
 
-
+enableButtonSubmit();
 addLifeguardsToTeam();
