@@ -6,14 +6,14 @@
   <% end %>
   <h3>Chef de poste:</h3>
     <%= simple_form_for [@date, @beach, @team, @team_lifeguard], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
-      <%= f.select :user_id, options_from_collection_for_select(User.where(rank_id: @leader_rank.id), :id, :full_name), prompt: "Choisir",
+      <%= f.select :user_id, options_from_collection_for_select(@avaible_chiefs, :id, :full_name), prompt: "Choisir",
                 required: true,
                 input_html: { autocomplete: "Perfil"} %>
     <% end %>
   <h3>Equipier(s): </h3>
     <% @team_mate_number.times do %>
      <%= simple_form_for [@date, @beach, @team, @team_lifeguard], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
-      <%= f.select :user_id, options_from_collection_for_select(User.where(rank_id: @team_mate_rank.id), :id, :full_name), prompt: "Choisir",
+      <%= f.select :user_id, options_from_collection_for_select(@avaible_team_mates, :id, :full_name), prompt: "Choisir",
                 required: true,
                 input_html: { autocomplete: "Perfil"} %>
     <% end %>

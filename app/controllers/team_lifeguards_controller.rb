@@ -4,8 +4,24 @@ class TeamLifeguardsController < ApplicationController
     @beach = Beach.find(params[:beach_id])
     @team = Team.find(params[:team_id])
     @team_lifeguard = TeamLifeguard.new
-    @leader_rank = Rank.find_by(name: "Chef de poste")
+
+    teams_on_that_day = Team.where(calendar: @date)
+    @chief_rank = Rank.find_by(name: "Chef de poste")
     @team_mate_rank = Rank.find_by(name: "Equipier")
+    @avaible_chiefs = User.where(rank_id: @chief_rank.id)
+    @avaible_team_mates = User.where(rank_id: @team_mate_rank.id)
+    teams_on_that_day.each do |team|
+      team_lifeguards = TeamLifeguard.where(team: team)
+      team_lifeguards.each do |team_lifeguard|
+        lifeguard = team_lifeguard.user
+        if lifeguard.rank_id == @chief_rank.id
+          @avaible_chiefs - [lifeguard]
+        elsif lifeguard.rank_id == @team_mate_rank.id
+          @avaible_team_mates - [lifeguard]
+        end
+      end
+    end
+
     @team_mate_number = @beach.number_of_team_members - 1
   end
 
