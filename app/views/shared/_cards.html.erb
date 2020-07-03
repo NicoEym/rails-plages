@@ -1,0 +1,36 @@
+<div class="row">
+  <% @beaches.each do |beach| %>
+    <div class="col-xs-12 col-md-12">
+      <div class="card-beach">
+        <div class="beach-image" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1521309033026-f3438b7c4264?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60);">
+        </div>
+        <div class="card-beach-infos">
+            <div class="card-title space_between width100 padding1">
+              <h2>Plage <%=beach.name%></h2>
+              <% team = Team.find_by(calendar: @date, beach: beach) %>
+              <div class="card-links">
+                <% if team.nil?  %>
+                  <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),   {:controller => "teams", :action => "create", :calendar_id => @date.id, :beach_id => beach.id} , :method=>:post %>
+
+                <% else %>
+                      <%= link_to raw('<i class="fas fa-plus-circle"></i>Modifier léquipe'),   edit_calendar_beach_team_team_lifeguard_path(team.calendar, team.beach, team) %>
+                      <%= link_to raw('<i class="fas fa-plus-circle"></i>Supprimer léquipe'),   calendar_beach_team_path(team.calendar, team.beach, team), method: :delete %>
+                <% end %>
+              </div>
+            </div>
+
+
+            <div class="card-lifeguards space_between width100 padding1">
+              <% lifeguards = TeamLifeguard.where(team: team) %>
+                <% lifeguards.each do |lifeguard| %>
+                <div class="lifeguard-profile">
+                  <%= image_tag(lifeguard.user.avatar_url, class: "avatar") %>
+                  <%= lifeguard.user.full_name %>
+                  </div>
+              <% end%>
+            </div>
+        </div>
+       </div>
+    </div>
+  <% end %>
+</div>

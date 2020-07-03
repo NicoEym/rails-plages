@@ -1,3 +1,5 @@
+<ul>
 <% @dates.each do |date| %>
-    <%= link_to(date.day, calendar_path(date.id))  %>
+    <li><%= link_to(date.day, calendar_path(date.id))  %></li>
 <% end %>
+</ul>
