@@ -30,7 +30,7 @@ function checkNoDouble(selectFields)  {
     // we get only the unique value of this array
     var unique = array.filter( onlyUnique );
     // if the size of the unique array is the same as the size of the initial array then we do not have duplicate
-    if (  unique.length == a.length)
+    if (  unique.length == array.length)
         {double = false};
     // the function will return true only when there is no duplciate name in the form
   return double;

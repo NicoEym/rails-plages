@@ -1,0 +1,75 @@
+.card-beach {
+  overflow: hidden;
+  height: 150px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  transition: all .3s ease-in-out;
+}
+
+// .card-song:hover {
+//   transform: scale(1.005);
+//   transition: all .2s linear;
+// }
+
+
+.card-beach .beach-image {
+  height: 100%;
+  width: 20%;
+  background-size: cover !important;
+  background-position: 50% 50%;
+}
+
+
+
+.card-beach h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-beach p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-beach .card-beach-infos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.card-title {
+  position: absolute;
+  top: 2px;
+}
+
+.card-lifeguards {
+  position: absolute;
+  bottom: 2px;
+}
+
+.lifeguard-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  background: black;
+  opacity: 0;
+  border-radius: 1em;
+}
