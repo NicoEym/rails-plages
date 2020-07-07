@@ -1,5 +1,5 @@
-<ul>
-<% @dates.each do |date| %>
-    <li><%= link_to(date.day, calendar_path(date.id))  %></li>
-<% end %>
-</ul>
+<br>
+<div class="container">
+  <h1 class="text-center">Planning</h1>
+  <%= render 'shared/cardsdate', dates: @dates %>
+</div>

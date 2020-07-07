@@ -24,7 +24,9 @@
     flex-direction: center;
 }
 
-
+li {
+  list-style-type: none;
+}
 
 a { color: inherit;
   text-decoration: none;
