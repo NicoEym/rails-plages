@@ -29,17 +29,27 @@ class TeamLifeguardsController < ApplicationController
     @team_lifeguard = TeamLifeguard.find_by(team: @team)
     @beach = @team.beach
     @date = @team.calendar
+    if @team_lifeguard.nil?
+      render :new
+    else
+      teams_on_that_day = Team.where(calendar: @date)
 
-    teams_on_that_day = Team.where(calendar: @date)
-
-    @available_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
-    @available_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
-    lifeguards = TeamLifeguard.where(team: @team)
-    lifeguards.each do |lifeguard|
-      user = User.find_by(id: lifeguard.user_id)
-      user.head? ? @available_heads << user : @available_arms << user
+      @available_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
+      @available_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
+      team_lifeguards = TeamLifeguard.where(team: @team)
+      @this_team_armlifeguards = []
+      team_lifeguards.each do |team_lifeguard|
+        lifeguard = User.find_by(id: team_lifeguard.user_id)
+        if lifeguard.head?
+          @head = lifeguard
+          @available_heads << @head
+        else
+          @this_team_armlifeguards << lifeguard
+          @available_arms << lifeguard
+       end
+      end
+      @team_mate_number = @beach.number_of_team_members - 1
     end
-    @team_mate_number = @beach.number_of_team_members - 1
   end
 
   def update

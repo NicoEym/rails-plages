@@ -3,7 +3,29 @@
       <br>
      <br>
       <br>
-      <%= render 'shared/formteam', team_lifeguard: @team_lifeguard %>
+      <div class="log-form col-xs-12 col-md-4">
+  <% if current_page?(controller: 'team_lifeguards', action: 'new')  %>
+    <h2>Créer l'équipe plage <%= @beach.name%> du <%= @date.day%> </h2>
+  <% else %>
+    <h2>Modifier l'équipe <%= @beach.name%> du <%= @date.day%></h2>
+  <% end %>
+  <h3>Chef de poste:</h3>
+    <%= simple_form_for [@date, @beach, @team, @team_lifeguard], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
+      <%= f.select :user_id, options_from_collection_for_select(@available_heads, :id, :full_name, @head.id), prompt: "Choisir",
+                required: true,
+                input_html: { autocomplete: "Perfil"} %>
+    <% end %>
+  <h3>Equipier(s): </h3>
+    <% for i in 0..@this_team_armlifeguards.count - 1 do %>
+     <%= simple_form_for [@date, @beach, @team, @team_lifeguard], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
+      <%= f.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name, @this_team_armlifeguards[i].id), prompt: "Choisir",
+                required: true,
+                input_html: { autocomplete: "Perfil"} %>
+    <% end %>
+  <% end %>
+  <button id="submit-team" class="btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" style="margin-bottom: 0.25em"><i class="fas fa-check"></i> Créer l'équipe</button>
+</div>
+
   <br>
 
 </div>
