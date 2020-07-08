@@ -6,33 +6,9 @@ class TeamLifeguardsController < ApplicationController
     @team_lifeguard = TeamLifeguard.new
 
     teams_on_that_day = Team.where(calendar: @date)
-    @chief_rank = Rank.find_by(name: "Chef de poste")
-    @team_mate_rank = Rank.find_by(name: "Equipier")
-    @avaible_chiefs = User.where(rank_id: @chief_rank.id)
-    puts @avaible_chiefs.count
-    @avaible_team_mates = User.where(rank_id: @team_mate_rank.id)
-    teams_on_that_day.each do |team|
-      team_lifeguards = TeamLifeguard.where(team: team)
-      # we will take out of the lsit of available chief every lifeguards taht already affected to a team that day
-      team_lifeguards.each do |team_lifeguard|
-        # we get the user
-        lifeguard = team_lifeguard.user
 
-        # if the user is a chief, we take it out of the list of available chief
-        if lifeguard.rank_id == @chief_rank.id
-          @avaible_chiefs = @avaible_chiefs - [lifeguard]
-          @avaible_chiefs.each do |chief|
-          end
-          # if the user is a team_mate, we take it out of the list of available team_mates
-        elsif lifeguard.rank_id == @team_mate_rank.id
-          @avaible_team_mates = @avaible_team_mates - [lifeguard]
-
-        end
-      end
-    end
-
-    @avaible_team_mates
-    @avaible_chiefs
+    @availalable_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
+    @availalable_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
     @team_mate_number = @beach.number_of_team_members - 1
   end
 
@@ -50,13 +26,20 @@ class TeamLifeguardsController < ApplicationController
 
   def edit
     @team = Team.find(params[:team_id])
-    @team_lifeguards = TeamLifeguard.where(team: @team)
+    @team_lifeguard = TeamLifeguard.find_by(team: @team)
     @beach = @team.beach
     @date = @team.calendar
-    @leader_rank = Rank.find_by(name: "Chef de poste")
-    @team_mate_rank = Rank.find_by(name: "Equipier")
-    @leader = @team_lifeguards.first
-    @team_mates = @team_lifeguards.drop(1)
+
+    teams_on_that_day = Team.where(calendar: @date)
+
+    @available_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
+    @available_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
+    lifeguards = TeamLifeguard.where(team: @team)
+    lifeguards.each do |lifeguard|
+      user = User.find_by(id: lifeguard.user_id)
+      user.head? ? @available_heads << user : @available_arms << user
+    end
+    @team_mate_number = @beach.number_of_team_members - 1
   end
 
   def update
@@ -65,6 +48,33 @@ class TeamLifeguardsController < ApplicationController
   end
 
   private
+
+  def look_for_available_headlifeguard(team, all_teams_on_that_day)
+    @available_heads = User.head_lifeguard
+    all_teams_on_that_day.each do |team|
+      team_lifeguards = TeamLifeguard.where(team: team)
+      # we will take out of the list of available chief every lifeguards taht already affected to a team that day
+      team_lifeguards.each do |team_lifeguard|
+        # we get the user
+        @available_heads = @available_heads - [team_lifeguard.user]
+        # if the user is a team_mate, we take it out of the list of available team_mates
+      end
+    end
+    @available_heads
+  end
+
+  def look_for_available_armlifeguard(team, all_teams_on_that_day)
+    @available_arms = User.arm_lifeguard
+    all_teams_on_that_day.each do |team|
+      team_lifeguards = TeamLifeguard.where(team: team)
+      # we will take out of the lsit of available chief every lifeguards taht already affected to a team that day
+      team_lifeguards.each do |team_lifeguard|
+        # we get the user
+        @available_arms = @available_arms - [team_lifeguard.user]
+      end
+    end
+    @available_arms
+  end
 
   def team_lifeguard_params
     params.require(:team_lifeguard).permit(:team_id, :user_id)
