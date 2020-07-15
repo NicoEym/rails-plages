@@ -4,12 +4,16 @@ class TeamsController < ApplicationController
     @date = Calendar.find(params[:calendar_id])
     @beach = Beach.find(params[:beach_id])
     @team = Team.new
-
     teams_on_that_day = Team.where(calendar: @date)
 
     @availalable_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
     @availalable_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
     @team_mate_number = @beach.number_of_team_members - 1
+    @new_head = @team.team_lifeguards.new
+    @new_lifeguards = []
+    (@beach.number_of_team_members - 1).times do
+      @new_lifeguards << @team.team_lifeguards.new
+    end
   end
 
   def create
@@ -17,9 +21,10 @@ class TeamsController < ApplicationController
     @team.calendar = Calendar.find(params[:calendar_id])
     @team.beach = Beach.find(params[:beach_id])
     if @team.save
-      redirect_to new_calendar_beach_team_team_lifeguard_path(@team.calendar, @team.beach, @team)
+      redirect_to calendar_path(@team.calendar)
     else
-      render :home
+      @team.team_lifeguards.new unless @team.team_lifeguards.any?
+      render :new
     end
   end
 
@@ -32,7 +37,7 @@ class TeamsController < ApplicationController
 
   private
 
-    def look_for_available_headlifeguard(team, all_teams_on_that_day)
+  def look_for_available_headlifeguard(team, all_teams_on_that_day)
     @available_heads = User.head_lifeguard
     all_teams_on_that_day.each do |team|
       team_lifeguards = TeamLifeguard.where(team: team)
@@ -59,8 +64,7 @@ class TeamsController < ApplicationController
     @available_arms
   end
 
-
   def team_params
-    params.permit(:calendar_id, :beach_id)
+    params.require(:team).permit(:calendar_id, :beach_id, team_lifeguards_attributes: :user_id)
   end
 end
