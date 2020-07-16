@@ -9,15 +9,14 @@ class TeamsController < ApplicationController
     @availalable_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
     @availalable_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
     @team_mate_number = @beach.number_of_team_members - 1
-    @new_head = @team.team_lifeguards.new
-    @new_lifeguards = []
-    (@beach.number_of_team_members - 1).times do
-      @new_lifeguards << @team.team_lifeguards.new
-    end
+
+    @beach.number_of_team_members.times { @team.team_lifeguards.build }
   end
 
   def create
+    puts team_params
     @team = Team.new(team_params)
+
     @team.calendar = Calendar.find(params[:calendar_id])
     @team.beach = Beach.find(params[:beach_id])
     if @team.save
@@ -25,6 +24,40 @@ class TeamsController < ApplicationController
     else
       @team.team_lifeguards.new unless @team.team_lifeguards.any?
       render :new
+    end
+  end
+
+  def edit
+    @team = Team.find(params[:id])
+    @team_lifeguards = TeamLifeguard.where(team: @team)
+    @beach = @team.beach
+    @date = @team.calendar
+    teams_on_that_day = Team.where(calendar: @date)
+
+    @available_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
+    @available_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
+    team_lifeguards = TeamLifeguard.where(team: @team)
+    @this_team_armlifeguards = []
+    team_lifeguards.each do |team_lifeguard|
+      lifeguard = User.find_by(id: team_lifeguard.user_id)
+      if lifeguard.head?
+        @head = lifeguard
+        @available_heads << @head
+      else
+        @this_team_armlifeguards << lifeguard
+        @available_arms << lifeguard
+     end
+    end
+    @team_mate_number = @beach.number_of_team_members - 1
+  end
+
+  def update
+    @team = Team.find(params[:id])
+    if @team.update(team_params)
+      redirect_to calendar_path(@team.calendar)
+     else
+
+      render :edit
     end
   end
 
@@ -65,6 +98,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:calendar_id, :beach_id, team_lifeguards_attributes: :user_id)
+    params.require(:team).permit(:calendar_id, :beach_id, team_lifeguards_attributes: [:id, :user_id, :_destroy])
   end
 end

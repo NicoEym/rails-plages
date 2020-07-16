@@ -5,22 +5,16 @@
     <h2>Modifier l'équipe <%= @beach.name%></h2>
   <% end %>
 
-    <%= simple_form_for [@date, @beach, @team], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
-      <%= f.select :beach_id, collection: [@beach.name] %>
-      <%= f.select :calendar_id, collection: [@date.day] %>
+  <%= simple_form_for [@date, @beach, @team], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
+    <%= f.select :beach_id, collection: [@beach.name] %>
+    <%= f.select :calendar_id, collection: [@date.day] %>
+
     <h3>Chef de poste:</h3>
-      <%= f.fields_for :team_lifeguard do |s| %>
-      <%= s.select :user_id, options_from_collection_for_select(@available_heads, :id, :full_name), prompt: "Choisir",
-                required: true,
-                input_html: { autocomplete: "Perfil"} %>
-    <h3>Equipier(s): </h3>
-      <% @team_mate_number.times do %>
-      <%= s.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name), prompt: "Choisir",
-                required: true,
-                input_html: { autocomplete: "Perfil"} %>
+    <%= f.fields_for :team_lifeguards do |ff| %>
+      <%= ff.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
       <% end %>
-      <% end %>
-        <%= f.button :submit %>
+
+    <%= f.button :submit %>
   <% end %>
 
   <button id="submit-team" class="btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" style="margin-bottom: 0.25em"><i class="fas fa-check"></i> Créer l'équipe</button>
