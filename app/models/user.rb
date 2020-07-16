@@ -21,4 +21,8 @@ class User < ApplicationRecord
   def self.arm_lifeguard
     where(head: false)
   end
+
+  def rank
+    head == true ? "Chef de poste" : "Equipier"
+  end
 end

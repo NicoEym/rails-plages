@@ -6,8 +6,8 @@ class TeamsController < ApplicationController
     @team = Team.new
     teams_on_that_day = Team.where(calendar: @date)
 
-    @availalable_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
-    @availalable_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
+    @available_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
+    @available_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
     (@beach.number_of_team_members - 1).times { @team.team_lifeguards.build }
     @team.head_lifeguard.build
   end
@@ -72,11 +72,11 @@ class TeamsController < ApplicationController
   def look_for_available_headlifeguard(team, all_teams_on_that_day)
     @available_heads = User.head_lifeguard
     all_teams_on_that_day.each do |team|
-      team_lifeguards = TeamLifeguard.where(team: team)
+      head_lifeguards = HeadLifeguard.where(team: team)
       # we will take out of the list of available chief every lifeguards taht already affected to a team that day
-      team_lifeguards.each do |team_lifeguard|
+      head_lifeguards.each do |head_lifeguard|
         # we get the user
-        @available_heads = @available_heads - [team_lifeguard.user]
+        @available_heads = @available_heads - [head_lifeguard.user]
         # if the user is a team_mate, we take it out of the list of available team_mates
       end
     end
