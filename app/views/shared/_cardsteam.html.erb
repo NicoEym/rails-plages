@@ -19,8 +19,13 @@
               </div>
             </div>
 
-
+          <% unless team.nil? %>
             <div class="card-lifeguards space_between width100 padding1">
+              <% head_lifeguards = HeadLifeguard.find_by(team: team) %>
+              <div class="lifeguard-profile">
+                  <%= image_tag(head_lifeguards.user.avatar_url, class: "avatar") %>
+                  <%= head_lifeguards.user.full_name %>
+              </div>
               <% lifeguards = TeamLifeguard.where(team: team) %>
                 <% lifeguards.each do |lifeguard| %>
                 <div class="lifeguard-profile">
@@ -29,6 +34,7 @@
                   </div>
               <% end%>
             </div>
+          <% end %>
         </div>
        </div>
     </div>
