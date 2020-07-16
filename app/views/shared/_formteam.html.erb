@@ -14,12 +14,15 @@
       <%= ff.select :user_id, options_from_collection_for_select(@available_heads, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
     <% end %>
     <h3>Equipiers:</h3>
-    <%= f.fields_for :team_lifeguards do |ff| %>
-      <%= ff.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
-    <% end %>
-
-    <%= f.button :submit %>
+    <ul>
+      <%= f.fields_for :team_lifeguards do |ff| %>
+       <li>
+        <%= ff.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
+      </li>
+      <% end %>
+    </ul>
+    <%= f.button :submit, "Créer l'équipe",id: "submit-team",class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" %>
   <% end %>
 
-  <button id="submit-team" class="btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" style="margin-bottom: 0.25em"><i class="fas fa-check"></i> Créer l'équipe</button>
+
 </div>

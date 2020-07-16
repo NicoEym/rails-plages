@@ -40,4 +40,4 @@ document.addEventListener('turbolinks:load', () => {
 
 
 enableButtonSubmit();
-addLifeguardsToTeam();
+

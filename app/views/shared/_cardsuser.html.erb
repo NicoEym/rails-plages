@@ -1,0 +1,15 @@
+<% @lifeguards.each do |lifeguard| %>
+  <div class="col-xs-12 col-md-12">
+    <div class="card-product">
+      <%= link_to("", user_path(lifeguard.id), class:"card-link")  %>
+      <div class="card-product-infos">
+        <h2><%= lifeguard.full_name %></h2>
+        <h5><%= lifeguard.rank %></h5>
+        <p>Contact: <%= lifeguard.email%> - <%= lifeguard.mobile%> </p>
+      </div>
+      <% unless lifeguard.avatar_url.nil? %>
+        <%= image_tag(lifeguard.avatar_url, class: "avatar") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
