@@ -10,9 +10,13 @@
     <%= f.select :calendar_id, collection: [@date.day] %>
 
     <h3>Chef de poste:</h3>
+      <%= f.fields_for :head_lifeguard do |ff| %>
+      <%= ff.select :user_id, options_from_collection_for_select(@available_heads, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
+    <% end %>
+    <h3>Equipiers:</h3>
     <%= f.fields_for :team_lifeguards do |ff| %>
       <%= ff.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
-      <% end %>
+    <% end %>
 
     <%= f.button :submit %>
   <% end %>

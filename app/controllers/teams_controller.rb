@@ -8,9 +8,8 @@ class TeamsController < ApplicationController
 
     @availalable_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
     @availalable_heads = look_for_available_headlifeguard(@team, teams_on_that_day)
-    @team_mate_number = @beach.number_of_team_members - 1
-
-    @beach.number_of_team_members.times { @team.team_lifeguards.build }
+    (@beach.number_of_team_members - 1).times { @team.team_lifeguards.build }
+    @team.head_lifeguard.build
   end
 
   def create
@@ -98,6 +97,7 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:calendar_id, :beach_id, team_lifeguards_attributes: [:id, :user_id, :_destroy])
+    params.require(:team).permit(:calendar_id, :beach_id, head_lifeguard_attributes: [:id, :user_id, :_destroy],
+                                                          team_lifeguards_attributes: [:id, :user_id, :_destroy])
   end
 end
