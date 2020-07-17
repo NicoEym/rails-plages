@@ -3,13 +3,12 @@
 require 'date'
 require 'faker'
 
-Beach.delete_all
-Calendar.delete_all
 TeamLifeguard.delete_all
+HeadLifeguard.delete_all
 Team.delete_all
+Calendar.delete_all
+Beach.delete_all
 User.delete_all
-
-
 
 Beach.create(name: "Marché", number_of_team_members: 5)
 Beach.create(name: "Berlioz", number_of_team_members: 4)
@@ -25,8 +24,7 @@ dates = Date.new(2020, 6, 17)
 Calendar.create(day: dates)
 
 
-
-10.times do
+for i in 2..10
   user = User.new(
 
     firstname:  Faker::Name.first_name,
@@ -34,14 +32,14 @@ Calendar.create(day: dates)
     mobile: Faker::PhoneNumber.cell_phone,
     email: Faker::Internet.email,
     head: true,
-    avatar_url: "https://i.pravatar.cc/300",
+    avatar_url: "https://i.pravatar.cc/150?img=#{i}",
     password:  'valid_password',
     password_confirmation: 'valid_password'
   )
   user.save!
 end
 
-20.times do
+for i in 11..30
   user = User.new(
 
     firstname:    Faker::Name.first_name ,
@@ -49,7 +47,7 @@ end
     mobile: Faker::PhoneNumber.cell_phone,
     email: Faker::Internet.email,
     head: false,
-    avatar_url: "https://i.pravatar.cc/300",
+    avatar_url: "https://i.pravatar.cc/150?img=#{i}",
     password:  'valid_password',
     password_confirmation: 'valid_password'
   )

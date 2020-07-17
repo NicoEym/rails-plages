@@ -10,11 +10,16 @@
               <% team = Team.find_by(calendar: @date, beach: beach) %>
               <div class="card-links">
                 <% if team.nil?  %>
-                  <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),  new_calendar_beach_team_path(@date, beach, team) %>
+
+                    <%= link_to raw('<i class="fas fa-plus-circle"></i>Créer léquipe'),  new_calendar_beach_team_path(@date, beach, team) %>
 
                 <% else %>
+                    <% if policy(team).edit? %>
                       <%= link_to raw('<i class="fas fa-plus-circle"></i>Modifier léquipe'),   edit_calendar_beach_team_path(team.calendar, team.beach, team) %>
+                     <% end %>
+                     <% if policy(team).destroy? %>
                       <%= link_to raw('<i class="fas fa-plus-circle"></i>Supprimer léquipe'),   calendar_beach_team_path(team.calendar, team.beach, team), method: :delete %>
+                      <% end %>
                 <% end %>
               </div>
             </div>
