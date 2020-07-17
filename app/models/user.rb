@@ -14,6 +14,10 @@ class User < ApplicationRecord
     head == true
   end
 
+  def admin?
+    admin == true
+  end
+
   def self.head_lifeguard
     where(head: true)
   end

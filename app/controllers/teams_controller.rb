@@ -1,9 +1,11 @@
 class TeamsController < ApplicationController
+  before_action :set_team, only: [:edit, :update, :destroy]
 
   def new
     @date = Calendar.find(params[:calendar_id])
     @beach = Beach.find(params[:beach_id])
     @team = Team.new
+    authorize @team
     teams_on_that_day = Team.where(calendar: @date)
 
     @available_arms = look_for_available_armlifeguard(@team, teams_on_that_day)
@@ -13,9 +15,8 @@ class TeamsController < ApplicationController
   end
 
   def create
-    puts team_params
     @team = Team.new(team_params)
-
+    authorize @team
     @team.calendar = Calendar.find(params[:calendar_id])
     @team.beach = Beach.find(params[:beach_id])
     if @team.save
@@ -27,7 +28,6 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    @team = Team.find(params[:id])
     @team_lifeguards = TeamLifeguard.where(team: @team)
     @beach = @team.beach
     @date = @team.calendar
@@ -45,29 +45,36 @@ class TeamsController < ApplicationController
       else
         @this_team_armlifeguards << lifeguard
         @available_arms << lifeguard
-     end
+      end
     end
     @team_mate_number = @beach.number_of_team_members - 1
   end
 
   def update
-    @team = Team.find(params[:id])
     if @team.update(team_params)
       redirect_to calendar_path(@team.calendar)
-     else
-
+    else
       render :edit
     end
   end
 
   def destroy
-    @team = Team.find(params[:id])
     date = @team.calendar
     @team.destroy
     redirect_to calendar_path(date.id)
   end
 
+  def index
+
+    @teams = policy_scope(Team)
+  end
+
   private
+
+  def set_team
+    @team = Team.find(params[:id])
+    authorize @team
+  end
 
   def look_for_available_headlifeguard(team, all_teams_on_that_day)
     @available_heads = User.head_lifeguard

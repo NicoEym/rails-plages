@@ -1,11 +1,12 @@
 class CalendarsController < ApplicationController
-
   def index
-    @dates = Calendar.all
+    @dates = policy_scope(Calendar)
+    authorize @dates
   end
 
   def show
     @date = Calendar.find(params[:id])
+    authorize @date
     @beaches = Beach.all
     @teams = Team.find_by(calendar: @date)
   end
