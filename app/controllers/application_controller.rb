@@ -25,11 +25,19 @@ class ApplicationController < ActionController::Base
   # end
 
   def after_sign_up_path_for(resource)
-    "/calendars/"# <- Path you want to redirect the user to.
+    if current_user.admin?
+      "/calendars/"# <- Path you want to redirect the user to.
+    else
+      "/teams/"
+    end
   end
 
   def after_sign_in_path_for(resource)
-    "/calendars/"# <- Path you want to redirect the user to.
+    if current_user.admin?
+      "/calendars/"# <- Path you want to redirect the user to.
+    else
+      "/teams/"
+    end
   end
 
   private
