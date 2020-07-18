@@ -1,4 +1,4 @@
-.card-beach {
+.card-team {
   overflow: hidden;
   height: 150px;
   background: white;
@@ -15,7 +15,7 @@
 // }
 
 
-.card-beach .beach-image {
+.card-team .card-team-beach-image {
   height: 100%;
   width: 20%;
   background-size: cover !important;
@@ -24,13 +24,13 @@
 
 
 
-.card-beach h2 {
+.card-team h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-beach p {
+.card-team p {
   font-size: 12px;
   line-height: 1.4;
   opacity: .7;
@@ -38,7 +38,7 @@
   margin-top: 8px;
 }
 
-.card-beach .card-beach-infos {
+.card-team .card-team-infos {
   width: 100%;
   height: 100%;
   display: flex;
@@ -74,28 +74,3 @@
   border-radius: 1em;
 }
 
-.card-date {
-  background-size: cover;
-  background-position: center;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  margin-bottom: 1em;
-
-}
-
-
-.card-date:hover {
-  opacity: 0.8;
-  };
-
-.card-date a {
-  text-decoration:none;
-};

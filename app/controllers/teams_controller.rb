@@ -65,7 +65,6 @@ class TeamsController < ApplicationController
   end
 
   def index
-
     @teams = policy_scope(Team)
   end
 

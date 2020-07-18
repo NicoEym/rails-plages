@@ -1,0 +1,14 @@
+<div class="row">
+  <% @beaches.each do |beach| %>
+    <div class="col-xs-12 col-md-4">
+      <div class="card-beach" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.unsplash.com/photo-1521309033026-f3438b7c4264?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60);">
+        <%= link_to("", beach_path(beach.id), class:"card-link")  %>
+         <div>
+          <h2 class="text-center"><%= beach.name %> </h2>
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+</div>
