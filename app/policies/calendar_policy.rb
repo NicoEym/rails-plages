@@ -10,7 +10,8 @@ class CalendarPolicy < ApplicationPolicy
   end
 
   def index?
-    user_is_admin?
+    true
+    #user_is_admin?
   end
 
   # def create?

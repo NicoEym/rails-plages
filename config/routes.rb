@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :teams, only: [:index]
+  resources :beaches
 
   resources :calendars do
     resources :beaches do
