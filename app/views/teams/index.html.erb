@@ -1,5 +1,9 @@
 <br>
   <div class="container">
-    <%= render 'shared/cardmyteams', team: @teams %>
+    <% if @teams.nil? %>
+      <p>Vous n'avez pas de plages prévues</p>
+    <% else %>
+      <%= render 'shared/cardmyteams', team: @teams %>
+    <% end %>
   </div>
 <br>

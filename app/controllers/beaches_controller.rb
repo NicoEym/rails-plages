@@ -3,9 +3,17 @@ class BeachesController < ApplicationController
 
   def new
     @beach = Beach.new
+    authorize @beach
   end
 
   def create
+    @beach = Beach.new(beach_params)
+    authorize @beach
+    if @beach.save
+      redirect_to beach_path(@beach)
+    else
+      render :new
+    end
   end
 
   def show
@@ -13,17 +21,19 @@ class BeachesController < ApplicationController
 
   def index
     @beaches = policy_scope(Beach)
+    @beach = Beach.new
   end
 
   def edit
   end
 
   def update
+    redirect_to beach_path(@beach)
   end
 
   def destroy
     @beach.destroy
-    redirect_to calendar_path(date.id)
+    redirect_to beaches_path
   end
 
   private

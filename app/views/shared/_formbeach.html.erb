@@ -1,0 +1,17 @@
+<div class="log-form col-xs-12 col-md-4">
+  <% if current_page?(controller: 'beaches', action: 'new')  %>
+    <h2>Créer une nouvelle plage</h2>
+  <% else %>
+    <h2>Modifier la plage <%= @beach.name%></h2>
+  <% end %>
+
+
+    <%= simple_form_for [@beach]  do |f| %>
+      <%= f.input :name, label: 'Nom de la plage:'%>
+      <%= f.input :address, label: "Adresse:" %>
+      <%= f.input :number_of_team_members, label: 'Nombre de sauveteurs:'%>
+      <%= f.input :photo_url, label: "Photo:" %>
+      <%= f.submit "Créer la plage" %>
+    <% end %>
+
+</div>

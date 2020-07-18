@@ -10,6 +10,14 @@ class User < ApplicationRecord
     "#{firstname} #{lastname}"
   end
 
+  def avatar
+    if avatar_url.nil?
+      "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+    else
+      avatar_url
+    end
+  end
+
   def head?
     head == true
   end
