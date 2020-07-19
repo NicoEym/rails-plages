@@ -51,6 +51,7 @@ class TeamsController < ApplicationController
   end
 
   def update
+    @beach = @team.beach
     if @team.update(team_params)
       redirect_to calendar_path(@team.calendar)
     else

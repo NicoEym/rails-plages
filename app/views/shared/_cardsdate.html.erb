@@ -4,7 +4,7 @@
       <div class="card-date" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
       <%= link_to("", calendar_path(date.id), class:"card-link")  %>
        <div>
-        <h3><%= date.day.to_formatted_s(:long_ordinal) %></h3>
+        <h3><%= date.day.strftime("%d-%m-%Y") %></h3>
         </div>
       </div>
     </div>

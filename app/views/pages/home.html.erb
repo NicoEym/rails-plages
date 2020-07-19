@@ -4,7 +4,34 @@
       <h1>Surveillance des plages Menton - RCM</h1>
       <p >Planning online des plages</p>
 
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+         <div>
+          <div class="button-box">
+            <%= link_to("Gérer planning", calendars_path, class:"btn-outline")  %>
+          </div >
+          <div class="button-box">
+            <%= link_to("Sauveteurs", users_path, class:"btn-outline")  %>
+          </div>
+          <div class="button-box">
+          <%= link_to("Plages du secteur", beaches_path, class:"btn-outline")  %>
+          </div>
+        </div>
+        <% else %>
+          <div>
+            <div class="button-box">
+              <%= link_to("Mon planning", teams_path, class:"btn-outline")  %>
+            </div >
+            <div class="button-box">
+              <%= link_to("Mon profil", users_path, class:"btn-outline")  %>
+            </div>
+            <div class="button-box">
+            <%= link_to("Plages du secteur", beaches_path, class:"btn-outline")  %>
+            </div>
+          </div>
+        <% end %>
 
+      <% else %>
         <div>
           <div class="button-box">
             <%= link_to("Se connecter", new_user_session_path, class:"btn-outline")  %>
@@ -13,7 +40,7 @@
             <%= link_to("S'inscrire", new_user_registration_path, class:"btn-outline")  %>
           </div>
         </div>
-
+      <% end %>
 
     </div>
   </div>
