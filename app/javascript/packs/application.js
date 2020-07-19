@@ -30,14 +30,17 @@ import "bootstrap";
 import { addLifeguardsToTeam } from '../components/add_lifeguards_to_team';
 import { enableButtonSubmit } from '../components/enable_button_submit';
 // import { initSelect2 } from '../components/init_select2';
+import { initMapbox } from '../plugins/init_mapbox';
 
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  // initSelect2();
+
+  initMapbox();
+  enableButtonSubmit();
 });
 
 
 
-enableButtonSubmit();
+
 

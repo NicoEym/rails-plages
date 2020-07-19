@@ -17,11 +17,22 @@ class BeachesController < ApplicationController
   end
 
   def show
+     @markers = {
+        lat: @beach.latitude,
+        lng: @beach.longitude
+      }
   end
 
   def index
     @beaches = policy_scope(Beach)
     @beach = Beach.new
+
+
+    @markers = @beach.map do |beach|
+      {
+        lat: beach.latitude,
+        lng: beach.longitude
+      }
   end
 
   def edit
