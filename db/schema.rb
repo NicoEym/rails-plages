@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_18_223139) do
+ActiveRecord::Schema.define(version: 2020_07_19_003707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2020_07_18_223139) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "photo_url"
+    t.float "longitude"
+    t.float "latitude"
   end
 
   create_table "calendars", force: :cascade do |t|
