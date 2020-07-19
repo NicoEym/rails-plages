@@ -37,4 +37,16 @@ class User < ApplicationRecord
   def rank
     head == true ? "Chef de poste" : "Equipier"
   end
+
+  def bnssa?
+    bnssa == true ? "Oui" : "Non"
+  end
+
+  def pse1?
+    pse1 == true ? "Oui" : "Non"
+  end
+
+  def pse2?
+    pse2 == true ? "Oui" : "Non"
+  end
 end

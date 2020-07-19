@@ -1,5 +1,11 @@
 <br>
   <div class="container">
+    <% if policy(@lifeguard).edit? %>
+      <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les informations</button>'), edit_user_path(@lifeguard) %>
+    <% end %>
+    <% if policy(@lifeguard).destroy? %>
+       <%= link_to raw('<button type="button" class="btn btn-danger">Supprimer le profil</button>'), user_path(@lifeguard), method: :delete %>
+    <% end %>
     <h1>Nom:</h1>
     <h2><%= @lifeguard.firstname %></h2>
     <h1>Prénom:</h1>
@@ -8,5 +14,11 @@
     <h1>Contact:</h1>
     <h2><%= @lifeguard.email %></h2>
     <h2><%= @lifeguard.mobile %></h2>
+
+    <h1>Diplôme:</h1>
+    <h2>A son BNSSA ? <%= @lifeguard.bnssa? %></h2>
+    <h2>A son PSE 1 ? <%= @lifeguard.pse1? %></h2>
+   <h2>A son PSE 2?<%= @lifeguard.pse2? %></h2>
+
   </div>
 <br>
