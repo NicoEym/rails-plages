@@ -8,10 +8,13 @@
 
     <%= simple_form_for [@beach]  do |f| %>
       <%= f.input :name, label: 'Nom de la plage:'%>
-      <%= f.input :address, label: "Adresse:" %>
-      <%= f.input :number_of_team_members, label: 'Nombre de sauveteurs:'%>
+      <%= f.input :address, label: "Commune:" %>
+      <%= f.input :latitude, label: "Latitude:" %>
+      <%= f.input :longitude, label: "Longitude:" %>
+      <%= f.input :number_of_team_members, collection: [2, 3, 4, 5], label: 'Nombre de sauveteurs:'%>
       <%= f.input :photo_url, label: "Photo:" %>
-      <%= f.submit "Créer la plage" %>
+
+      <%= f.submit "Valider la plage", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" %>
     <% end %>
 
 </div>

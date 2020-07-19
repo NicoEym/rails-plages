@@ -1,28 +1,24 @@
 <div class="log-form col-xs-12 col-md-4">
   <% if current_page?(controller: 'teams', action: 'new')  %>
-    <h2>Créer l'équipe plage <%= @beach.name%></h2>
+    <h2>Créer l'équipe</h2>
   <% else %>
-    <h2>Modifier l'équipe <%= @beach.name%></h2>
+    <h2>Modifier l'équipe</h2>
   <% end %>
 
-  <%= simple_form_for [@date, @beach, @team], remote: true, input_html: {  class: "form-lifeguard"} do |f| %>
-    <%= f.select :beach_id, collection: [@beach.name] %>
-    <%= f.select :calendar_id, collection: [@date.day] %>
+  <%= simple_form_for [@date, @beach, @team], html: { class: "form-group"} do |f| %>
+    <%= f.input :beach_id, placeholder: @beach.name, input_html: {:value => @beach.name, readonly: true}, label: "Plage:" %>
+    <%= f.input :calendar_id, placeholder: @date.day.strftime("%d-%m-%Y"), :input_html => { :value => @date.day, readonly: true }, label: "Date:" %>
 
-    <h3>Chef de poste:</h3>
+    <h5>Chef de poste:</h5>
       <%= f.fields_for :head_lifeguard do |ff| %>
-      <%= ff.select :user_id, options_from_collection_for_select(@available_heads, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
+      <%= ff.input :user_id, collection: @available_heads, label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, html: {class: "form-control"}, label: false %>
     <% end %>
-    <h3>Equipiers:</h3>
-    <ul>
+
+    <h5>Equipiers:</h5>
       <%= f.fields_for :team_lifeguards do |ff| %>
-       <li>
-        <%= ff.select :user_id, options_from_collection_for_select(@available_arms, :id, :full_name), prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"} %>
-      </li>
+        <%= ff.input :user_id, collection: @available_arms, label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: false %>
       <% end %>
-    </ul>
-    <%= f.button :submit, "Créer l'équipe",id: "submit-team",class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" %>
+
+    <%= f.button :submit, "Créer l'équipe",id: "submit-team", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" %>
   <% end %>
-
-
 </div>

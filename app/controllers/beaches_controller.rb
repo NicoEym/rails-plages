@@ -17,29 +17,35 @@ class BeachesController < ApplicationController
   end
 
   def show
-     @markers = {
+     @markers = [{
         lat: @beach.latitude,
-        lng: @beach.longitude
-      }
+        lng: @beach.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { name: @beach.name, city: @beach.address })
+      }]
   end
 
   def index
     @beaches = policy_scope(Beach)
     @beach = Beach.new
 
-
-    @markers = @beach.map do |beach|
+    @markers = @beaches.map do |beach|
       {
         lat: beach.latitude,
-        lng: beach.longitude
+        lng: beach.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { name: beach.name, city: beach.address })
       }
+    end
   end
 
   def edit
   end
 
   def update
-    redirect_to beach_path(@beach)
+    if @beach.update(beach_params)
+      redirect_to beach_path(@beach)
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -52,5 +58,9 @@ class BeachesController < ApplicationController
   def set_beach
     @beach = Beach.find(params[:id])
     authorize @beach
+  end
+
+  def beach_params
+    params.require(:beach).permit(:name, :address, :latitude, :longitude, :number_of_team_members,:photo_url)
   end
 end
