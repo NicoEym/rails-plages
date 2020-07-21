@@ -51,15 +51,15 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team.calendar = Calendar.find(params[:calendar_id])
-    @team.beach = Beach.find(params[:beach_id])
-    @team.update(team_params)
-    # if @team.update(team_params)
-    #   redirect_to calendar_path(@team.calendar)
-    # else
-    #   @team.team_lifeguards.new unless @team.team_lifeguards.any?
-    #   render :edit
-    # end
+    @date = @team.calendar
+    @beach = @team.beach = Beach.find(params[:beach_id])
+
+    if @team.update(team_params)
+      redirect_to calendar_path(@team.calendar)
+    else
+      @team.team_lifeguards.new unless @team.team_lifeguards.any?
+      render :edit
+    end
   end
 
   def destroy
