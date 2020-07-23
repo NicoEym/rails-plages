@@ -1,13 +1,13 @@
 <div class="log-form col-xs-12 col-md-4">
   <% if current_page?(controller: 'teams', action: 'new')  %>
-    <h2>Créer l'équipe</h2>
+      <h2>Créer l'équipe</h2>
   <% else %>
-    <h2>Modifier l'équipe</h2>
+      <h2>Modifier l'équipe</h2>
   <% end %>
 
   <%= simple_form_for [@date, @beach, @team], html: { class: "form-group"} do |f| %>
-    <%= f.input :beach_id, placeholder: @beach.name, input_html: {:value => @beach.name, readonly: true}, label: "Plage:" %>
-    <%= f.input :calendar_id, placeholder: @date.day.strftime("%d-%m-%Y"), :input_html => { :value => @date.day, readonly: true }, label: "Date:" %>
+    <%= f.input :beach_id, collection: [@beach], selected: @beach, input_html: { readonly: true}, label: "Plage:" %>
+    <%= f.input :calendar_id, collection: [@date], selected: @date, label_method: :day, :input_html => {  readonly: true }, label: "Date:" %>
 
     <h5>Chef de poste:</h5>
       <%= f.fields_for :head_lifeguard do |ff| %>
@@ -19,6 +19,6 @@
         <%= ff.input :user_id, collection: @available_arms, label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: false %>
       <% end %>
 
-    <%= f.button :submit, "Créer l'équipe",id: "submit-team", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" %>
+    <%= f.button :submit, "Valider l'équipe",id: "submit-team", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
   <% end %>
 </div>
