@@ -41,17 +41,27 @@ a { color: inherit;
   }
 }
 
+.white-color {
+  color: white!important;
+}
+
 .space_between {
   display: flex;
   justify-content: space-between;
 }
-
+.flex {
+ display: flex;
+}
 .space_around {
   justify-content: space-around;
 }
 
 .width100 {
   width: 100%;
+}
+
+.orange {
+  background-color: #DC602E;
 }
 
 .text-center {

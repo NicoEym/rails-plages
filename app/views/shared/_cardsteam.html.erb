@@ -15,17 +15,17 @@
 
                 <% else %>
                     <% if policy(team).edit? %>
-                      <%= link_to raw('<i class="fas fa-plus-circle"></i>Modifier léquipe'),   edit_calendar_beach_team_path(team.calendar, team.beach, team) %>
+                      <%= link_to raw('<i class="fas fa-edit"></i>Modifier léquipe'),   edit_calendar_beach_team_path(team.calendar, team.beach, team) %>
                      <% end %>
                      <% if policy(team).destroy? %>
-                      <%= link_to raw('<i class="fas fa-plus-circle"></i>Supprimer léquipe'),   calendar_beach_team_path(team.calendar, team.beach, team), method: :delete %>
+                      <%= link_to raw('<i class="fas fa-times-circle"></i>Supprimer léquipe'),   calendar_beach_team_path(team.calendar, team.beach, team), method: :delete %>
                       <% end %>
                 <% end %>
               </div>
             </div>
 
           <% unless team.nil? %>
-            <div class="card-lifeguards space_between width100 padding1">
+            <div class="card-lifeguards flex width100 padding1">
               <% head_lifeguards = HeadLifeguard.find_by(team: team) %>
               <div class="lifeguard-profile">
                   <%= image_tag(head_lifeguards.user.avatar, class: "avatar") %>

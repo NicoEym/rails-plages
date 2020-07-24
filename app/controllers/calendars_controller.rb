@@ -7,7 +7,7 @@ class CalendarsController < ApplicationController
   def show
     @date = Calendar.find(params[:id])
     authorize @date
-    @beaches = Beach.all
+    @beaches = Beach.all.order('longitude desc')
     @teams = Team.find_by(calendar: @date)
   end
 end
