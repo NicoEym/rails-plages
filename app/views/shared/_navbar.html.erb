@@ -1,7 +1,9 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "https://images-na.ssl-images-amazon.com/images/I/41oH1qwyY5L._AC_SX425_.jpg" %>
+  <div class="navbar-icon-box">
+    <%= link_to root_path, class: "navbar-brand white-color" do %>
+      <i class="fas fa-first-aid"></i>
     <% end %>
+  </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,19 +14,19 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
           <% if current_user.admin? %>
-              <li class="nav-item active">
-              <%= link_to "Planning", calendars_path, class: "nav-link" %>
+              <li class="nav-item">
+              <%= link_to "Planning", calendars_path, class: "nav-link white-color" %>
               </li>
-              <li class="nav-item active">
-                <%= link_to "Sauveteurs", users_path, class: "nav-link" %>
+              <li class="nav-item">
+                <%= link_to "Sauveteurs", users_path, class: "nav-link white-color" %>
               </li>
           <% else %>
-               <li class="nav-item active">
-                <%= link_to "Mes plages", teams_path, class: "nav-link" %>
+               <li class="nav-item">
+                <%= link_to "Mes plages", teams_path, class: "nav-link white-color" %>
               </li>
           <% end %>
-          <li class="nav-item active">
-              <%= link_to "Plages du secteur", beaches_path, class: "nav-link" %>
+          <li class="nav-item">
+              <%= link_to "Plages du secteur", beaches_path, class: "nav-link white-color" %>
           </li>
 
         <li class="nav-item dropdown">
