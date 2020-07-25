@@ -14,7 +14,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user_profile_or_user_is_admin?
+    true
   end
 
   def destroy?
@@ -28,6 +28,6 @@ class UserPolicy < ApplicationPolicy
   end
 
   def user_profile_or_user_is_admin?
-    @user.admin? || @user == user
+    @user.admin? || @record == user
   end
 end

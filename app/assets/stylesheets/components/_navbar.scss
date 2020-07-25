@@ -14,7 +14,11 @@
 }
 
 
-.navbar-lewagon .navbar-icon-box {
-  height: 2em;
+.navbar-lewagon img {
+  height: 3em;
   color: white;
+}
+
+.navbar-lewagon .image-box {
+  display: flex;
 }

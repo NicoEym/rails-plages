@@ -94,6 +94,11 @@ a { color: inherit;
   border-radius: 0.5em;
 }
 
+.horizontal-scroll {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
 .marginb {
   margin-bottom: 1em;
 }

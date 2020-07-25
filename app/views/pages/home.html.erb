@@ -23,7 +23,7 @@
               <%= link_to("Mon planning", teams_path, class:"btn-outline")  %>
             </div >
             <div class="button-box">
-              <%= link_to("Mon profil", users_path, class:"btn-outline")  %>
+              <%= link_to("Mon profil", user_path(current_user.id), class:"btn-outline")  %>
             </div>
             <div class="button-box">
             <%= link_to("Plages du secteur", beaches_path, class:"btn-outline")  %>
