@@ -1,8 +1,8 @@
 <div class="log-form col-xs-12 col-md-4">
   <% if current_page?(controller: 'users', action: 'new')  %>
-    <h2>Nouveau sauveteur:</h2>
+      <h2>Nouveau sauveteur:</h2>
   <% else %>
-    <h2>Modifier <%= @lifeguard.full_name%></h2>
+      <h2>Modifier profil:</h2>
   <% end %>
 
 
@@ -10,21 +10,23 @@
       <%= f.input :firstname,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "Prénom" }%>
+                  label: "Prénom:"%>
       <%= f.input :lastname,
                   required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "Nom" }%>
+                  label: "Nom:" %>
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true%>
       <%= f.input :mobile,
                   required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Mobile" }%>
+                  autofocus: true %>
       <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon BNSSA ?" %>
       <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
       <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>
       <%= f.input :avatar_url, label: "Photo de profil:" %>
 
-      <%= f.submit "Valider les informations", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-4" %>
+      <%= f.submit "Valider les informations", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
     <% end %>
 
 </div>
