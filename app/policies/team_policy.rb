@@ -1,7 +1,7 @@
 class TeamPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-        @scope.where(user: @user)
+      @scope.where(user: @user)
       @teams = []
       if @user.head?
         plannings = HeadLifeguard.where(user: @user)
@@ -9,10 +9,10 @@ class TeamPolicy < ApplicationPolicy
           @teams << planning.team
         end
       else
-        plannings = HeadLifeguard.where(user: @user)
-         plannings.each do |planning|
-          @teams << planning.team
-        end
+        plannings = TeamLifeguard.where(user: @user)
+          plannings.each do |planning|
+            @teams << planning.team
+          end
       end
       @teams
     end
