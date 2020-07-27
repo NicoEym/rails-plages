@@ -73,6 +73,7 @@ class TeamsController < ApplicationController
 
   def index
     @teams = policy_scope(Team)
+    @dates = Calendar.all.order('day desc')
   end
 
   private
