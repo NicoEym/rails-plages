@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def index
     @lifeguards = policy_scope(User)
+    admins = User.admins
+    @lifeguards = @lifeguards - [admins]
     authorize @lifeguards
   end
 
@@ -41,6 +43,6 @@ class UsersController < ApplicationController
   end
 
   def lifeguard_params
-    params.require(:user).permit(:firstname, :lastname, :mobile, :bnssa, :pse1, :pse2)
+    params.require(:user).permit(:firstname, :lastname, :mobile, :photo, :bnssa, :pse1, :pse2)
   end
 end

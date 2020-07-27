@@ -7,8 +7,8 @@
         <h5><%= lifeguard.rank %></h5>
         <p>Contact: <%= lifeguard.email%> - <%= lifeguard.mobile%> </p>
       </div>
-      <% unless lifeguard.avatar_url.nil? %>
-        <%= image_tag(lifeguard.avatar_url, class: "avatar-large") %>
+      <% unless lifeguard.photo.nil? %>
+        <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
       <% end %>
     </div>
   </div>
