@@ -29,7 +29,7 @@
               <% head_lifeguards = HeadLifeguard.find_by(team: team) %>
               <%= link_to user_path(head_lifeguards.user.id) do %>
                 <div class="lifeguard-profile">
-                    <%= image_tag(head_lifeguards.user.avatar, class: "avatar-large") %>
+                    <%= cl_image_tag head_lifeguards.user.photo, class: "avatar-large" %>
                     <p><%= head_lifeguards.user.full_name %></p>
                 </div>
               <% end %>
@@ -37,7 +37,7 @@
                 <% lifeguards.each do |lifeguard| %>
                   <%= link_to user_path(lifeguard.user.id) do %>
                     <div class="lifeguard-profile">
-                      <%= image_tag(lifeguard.user.avatar, class: "avatar-large") %>
+                      <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
                       <p><%= lifeguard.user.full_name %></p>
                     </div>
                   <%end %>

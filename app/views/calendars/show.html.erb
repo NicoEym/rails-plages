@@ -1,6 +1,10 @@
 <br>
   <div class="container">
     <h1 class="text-center"><%=@date.day %></h1>
-      <%= render 'shared/cardsteam', beach: @beaches %>
+      <% if @beaches.empty? %>
+        <p>Vous devez d'abord créer vos plages avant de pouvoir créer des équipes.</p>
+      <% else %>
+        <%= render 'shared/cardsteam', beach: @beaches %>
+      <% end %>
   </div>
 <br>

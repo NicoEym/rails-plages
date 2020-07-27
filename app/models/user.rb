@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :teams, through: :team_lifeguards
+  # has_one_attached :photo
 
   def full_name
     "#{firstname} #{lastname}"
@@ -32,6 +33,10 @@ class User < ApplicationRecord
 
   def self.arm_lifeguard
     where(head: false)
+  end
+
+  def self.admins
+    where(admin: true)
   end
 
   def rank
