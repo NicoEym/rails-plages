@@ -5,7 +5,7 @@ require 'faker'
 require "open-uri"
 
 TeamLifeguard.delete_all
-HeadLifeguard.delete_all
+
 Team.delete_all
 Calendar.delete_all
 Beach.delete_all
