@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   def index
     @lifeguards = policy_scope(User)
     admins = User.admins
-    @lifeguards = @lifeguards - [admins]
+    admins.each do |admin|
+      @lifeguards.delete(admin)
+    end
     authorize @lifeguards
   end
 

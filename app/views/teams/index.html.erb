@@ -3,7 +3,7 @@
     <% if @teams.empty? %>
      <p> Vous n'avez pas de plages prévues.</p>
     <% else %>
-      <%= render 'shared/cardmyteams', [team: @teams, calendar: @dates] %>
+      <%= render 'shared/cardmyteams', team: @teams, calendar: @dates %>
     <% end %>
   </div>
 <br>

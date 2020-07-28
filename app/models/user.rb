@@ -3,9 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+  has_many :head_lifeguard, dependent: :destroy
+  has_many :team_lifeguards, dependent: :destroy
+  has_many :teams, through: :head_lifeguards
   has_many :teams, through: :team_lifeguards
-  # has_one_attached :photo
+  has_one_attached :photo
 
   def full_name
     "#{firstname} #{lastname}"

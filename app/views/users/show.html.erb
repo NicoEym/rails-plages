@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="row justify-center">
-          <%= cl_image_tag lifeguard.photo, class: "avatar-normal" %>
+          <%= cl_image_tag(@lifeguard.photo.key, crop: :thumb, gravity: :face, class: "avatar-normal") %>
       </div>
       <div class="row justify-center">
         <h2><%= @lifeguard.full_name %></h2>

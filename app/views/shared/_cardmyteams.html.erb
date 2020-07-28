@@ -1,6 +1,6 @@
 <div class="row">
   <% @dates.each do |date| %>
-    <% team = @teams.find_by(calendar: date)%>
+    <% team = @teams.find_by(calendar_id: date.id)%>
     <% unless team.nil? %>
     <div class="col-xs-12 col-md-12">
       <div class="card-team">
@@ -11,15 +11,15 @@
             <h2>Plage <%= team.beach.name%> - <%= team.calendar.day.strftime("%d-%m-%Y")%></h2>
           </div>
           <div class="card-lifeguards flex width100 padding1 horizontal-scroll">
-            <% head_lifeguards = HeadLifeguard.find_by(team: team) %>
-            <%= link_to user_path(head_lifeguards.user.id) do %>
+            <% head_lifeguard = team.head.first %>
+            <%= link_to user_path(head_lifeguard.user.id) do %>
               <div class="lifeguard-profile">
-                <%= cl_image_tag head_lifeguards.user.photo, class: "avatar-large" %>
-                <%= head_lifeguards.user.full_name %>
+                <%= cl_image_tag head_lifeguard.user.photo, class: "avatar-large" %>
+                <%= head_lifeguard.user.full_name %>
               </div>
             <% end %>
-            <% lifeguards = TeamLifeguard.where(team: team) %>
-            <% lifeguards.each do |lifeguard| %>
+
+            <% team.lifeguards.each do |lifeguard| %>
               <%= link_to user_path(lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
                   <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>

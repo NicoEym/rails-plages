@@ -17,15 +17,16 @@
                   label: "Nom:" %>
       <%= f.input :email,
                   required: true,
-                  autofocus: true%>
+                  autofocus: true,
+                  label: "Adresse email" %>
       <%= f.input :mobile,
                   required: true,
-                  autofocus: true %>
-      <%= f.input :photo, as: :file %>
+                  autofocus: true,
+                  label: "Téléphone portable:" %>
+      <%= f.input :photo, as: :file, label: "Photo de profil:" %>
       <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon BNSSA ?" %>
       <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
       <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>
-      <%= f.input :avatar_url, label: "Photo de profil:" %>
 
       <%= f.submit "Valider les informations", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
     <% end %>

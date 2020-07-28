@@ -26,15 +26,14 @@
 
           <% unless team.nil? %>
             <div class="card-lifeguards flex width100 padding1 horizontal-scroll">
-              <% head_lifeguards = HeadLifeguard.find_by(team: team) %>
-              <%= link_to user_path(head_lifeguards.user.id) do %>
+              <% head_lifeguard = team.head.first %>
+              <%= link_to user_path(head_lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
-                    <%= cl_image_tag head_lifeguards.user.photo, class: "avatar-large" %>
-                    <p><%= head_lifeguards.user.full_name %></p>
+                    <%= cl_image_tag head_lifeguard.user.photo, class: "avatar-large" %>
+                    <p><%= head_lifeguard.user.full_name %></p>
                 </div>
               <% end %>
-              <% lifeguards = TeamLifeguard.where(team: team) %>
-                <% lifeguards.each do |lifeguard| %>
+                <% team.lifeguards.each do |lifeguard| %>
                   <%= link_to user_path(lifeguard.user.id) do %>
                     <div class="lifeguard-profile">
                       <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
