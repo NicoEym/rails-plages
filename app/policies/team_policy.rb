@@ -1,7 +1,6 @@
 class TeamPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      puts @scope.where(user: @user)
       @scope.with(@user)
     end
   end

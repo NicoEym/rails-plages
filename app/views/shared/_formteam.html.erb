@@ -10,15 +10,16 @@
     <%= f.input :calendar_id, collection: [@date], selected: @date, label_method: :day, :input_html => {  readonly: true }, label: "Date:" %>
 
     <h5>Chef de poste:</h5>
-      <%= f.fields_for :head_lifeguard do |ff| %>
+      <%= f.fields_for :team_lifeguards, @team.team_lifeguards[0] do |ff| %>
       <%= ff.input :user_id, collection: @available_heads, label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, html: {class: "form-control"}, label: false %>
     <% end %>
 
     <h5>Equipiers:</h5>
-      <%= f.fields_for :team_lifeguards do |ff| %>
+    <% for i in 1..@team_mate_number %>
+      <%= f.fields_for :team_lifeguards, @team.team_lifeguards[i] do |ff| %>
         <%= ff.input :user_id, collection: @available_arms, label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: false %>
       <% end %>
-
+    <% end %>
     <%= f.button :submit, "Valider l'équipe",id: "submit-team", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
   <% end %>
 </div>
