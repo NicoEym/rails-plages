@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  require "date"
   before_action :set_team, only: [:edit, :update, :destroy]
 
   def new
@@ -6,8 +7,8 @@ class TeamsController < ApplicationController
     @beach = Beach.find(params[:beach_id])
     @team = Team.new
     authorize @team
-    teams_on_that_day = Team.where(calendar: @date)
-
+    teams_on_that_day = @date.teams
+    puts teams_on_that_day
     # We will load all the unaffected team mates
     @available_arms = look_for_available_armlifeguard(teams_on_that_day)
     # We will load all the unaffected head lifeguards
@@ -34,7 +35,7 @@ class TeamsController < ApplicationController
     @team_lifeguards = TeamLifeguard.where(team: @team)
     @beach = @team.beach
     @date = @team.calendar
-    teams_on_that_day = Team.where(calendar: @date)
+    teams_on_that_day = @date.teams
 
     @available_arms = look_for_available_armlifeguard(teams_on_that_day)
     @available_heads = look_for_available_headlifeguard(teams_on_that_day)
@@ -64,36 +65,59 @@ class TeamsController < ApplicationController
   end
 
   def index
-    @teams = policy_scope(Team)
-    @dates = Calendar.all.order('day desc')
+    @user_affected_teams = policy_scope(Team)
+    today = Date.today
+    @user_program_for_the_next_7_days = []
+    for i in 0..6
+      date = today + i
+      date_for_test = Calendar.find_by(day: date)
+      # // for this date, if we have less team created than number of beaches, the plaaning has not been finalized yet
+      if date_for_test.teams.count < Beach.all.count
+        @user_program_for_the_next_7_days <<  { program: "Planning not created for this day", date: date_for_test }
+      # // we check if the user is affected to a beach. If it is not the case, we send a program Rest
+      elsif is_working_on_that_day?(date_for_test, @user_affected_teams) == false
+        @user_program_for_the_next_7_days <<  { program: "Rest", date: date_for_test }
+      # // we check if the user is affected to a beach. If it is  the case, we send a program Working with the details of the team
+      elsif is_working_on_that_day?(date_for_test, @user_affected_teams)
+        @user_program_for_the_next_7_days << { program: "Working", team: @user_affected_teams.find_by(calendar_id: date_for_test.id), date: date_for_test }
+      end
+    end
+    @user_program_for_the_next_7_days
   end
 
   private
+
+  def is_working_on_that_day?(date, teams)
+    team = teams.find_by(calendar_id: date.id)
+    team.nil? ? false : true
+  end
 
   def set_team
     @team = Team.find(params[:id])
     authorize @team
   end
 
-  def look_for_available_headlifeguard(all_teams_on_that_day)
+  def look_for_available_headlifeguard(every_team_on_that_day)
     # we get all the head lifeguards that can work
     @available_heads = User.head_lifeguard
     # for each team on that day
-    all_teams_on_that_day.each do |team|
+    every_team_on_that_day.each do |team|
+      puts "All heads #{@available_heads}"
+      puts "this chief #{team.head}"
       # we get the user
-      @available_heads = @available_heads - [team.head]
+      @available_heads = @available_heads - team.head
       # if the user is a team_mate, we take it out of the list of available team_mates
     end
     @available_heads
   end
 
-  def look_for_available_armlifeguard(all_teams_on_that_day)
+  def look_for_available_armlifeguard(every_team_on_that_day)
     # we get all the team lifeguards that can work
     @available_arms = User.arm_lifeguard
     # for each team on that day
-    all_teams_on_that_day.each do |team|
+    every_team_on_that_day.each do |team|
        # we get the user
-      @available_arms = @available_arms - [team.lifeguards]
+      @available_arms = @available_arms - team.lifeguards
     end
     @available_arms
   end

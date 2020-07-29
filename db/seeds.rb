@@ -1,5 +1,3 @@
-
-
 require 'date'
 require 'faker'
 require "open-uri"
@@ -12,8 +10,8 @@ Beach.delete_all
 User.delete_all
 
 
-for i in 1..5
-  dates = Date.new(2020, 7, i)
+for i in 0..10
+  dates = Date.today + i
   Calendar.create(day: dates)
   puts dates
 end
@@ -75,7 +73,7 @@ for i in 2..10
   user.save!
 end
 
-for i in 11..30
+for i in 11..40
   user = User.new(
     firstname:    Faker::Name.first_name ,
     lastname: Faker::Name.last_name,

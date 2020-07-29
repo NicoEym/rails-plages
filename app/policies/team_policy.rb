@@ -1,7 +1,8 @@
 class TeamPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      @scope.with(@user)
+      # @scope.with(@user)
+      @user.teams
     end
   end
 
