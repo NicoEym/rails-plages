@@ -1,9 +1,9 @@
 <br>
   <div class="container">
-    <% if @teams.empty? %>
+    <% if @user_program_for_the_next_7_days.empty? %>
      <p> Vous n'avez pas de plages prévues.</p>
     <% else %>
-      <%= render 'shared/cardmyteams', team: @teams, calendar: @dates %>
+      <%= render 'shared/cardmyteams', team: @user_program_for_the_next_7_days %>
     <% end %>
   </div>
 <br>
