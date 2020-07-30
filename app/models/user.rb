@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   def avatar
     if avatar_url.nil?
-      "https://images.pexels.com/photos/356079/pexels-photo-356079.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+      "https://as1.ftcdn.net/jpg/02/33/46/24/500_F_233462402_Fx1yke4ng4GA8TJikJZoiATrkncvW6Ib.jpg"
     else
       avatar_url
     end
