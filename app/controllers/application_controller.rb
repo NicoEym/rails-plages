@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       "/calendars/"# <- Path you want to redirect the user to.
     else
-      "/teams/"
+      edit_user_path(resource)
     end
   end
 
