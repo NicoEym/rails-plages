@@ -7,10 +7,10 @@
         <h5><%= lifeguard.rank %></h5>
         <p>Contact: <%= lifeguard.email%> - <%= lifeguard.mobile%> </p>
       </div>
-      <% if lifeguard.photo.nil? %>
-          <%= image_tag lifeguard.avatar, class: "avatar-large" %>
-          <% else %>
-          <%= cl_image_tag(lifeguard.photo.key, crop: :thumb, gravity: :face, class: "avatar-large") %>
+     <% unless  %>
+          <%= cl_image_tag lifeguard.photo, class: "avatar-large" %>
+        <% else %>
+          <%= image_tag lifeguard.avatar_url, class: "avatar-large" %>
         <% end %>
     </div>
   </div>

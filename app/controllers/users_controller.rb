@@ -2,11 +2,8 @@ class UsersController < ApplicationController
   before_action :set_lifeguard, only: [:show, :edit, :update, :destroy]
 
   def index
+    # will get all the lifeguards except the admins
     @lifeguards = policy_scope(User)
-    admins = User.admins
-    admins.each do |admin|
-      @lifeguards.delete(admin)
-    end
     authorize @lifeguards
   end
 

@@ -2,17 +2,17 @@
   <div class="container">
     <div>
       <div class="row justify-center">
-        <% if @lifeguard.photo.nil? %>
-          <%= image_tag @lifeguard.avatar, class: "avatar-normal" %>
-          <% else %>
-          <%= cl_image_tag(@lifeguard.photo.key, crop: :thumb, gravity: :face, class: "avatar-normal") %>
+        <% unless  %>
+          <%= cl_image_tag @lifeguard.photo, class: "avatar-normal" %>
+        <% else %>
+          <%= image_tag @lifeguard.avatar_url, class: "avatar-normal" %>
         <% end %>
-
       </div>
       <div class="row justify-center">
         <h2><%= @lifeguard.full_name %></h2>
       </div>
     </div>
+
     <br>
     <br>
 
