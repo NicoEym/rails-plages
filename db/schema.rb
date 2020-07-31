@@ -90,10 +90,10 @@ ActiveRecord::Schema.define(version: 2020_07_30_010745) do
     t.string "firstname"
     t.string "lastname"
     t.boolean "admin", default: false, null: false
-    t.boolean "head"
-    t.boolean "bnssa"
-    t.boolean "pse1"
-    t.boolean "pse2"
+    t.boolean "head", default: false, null: false
+    t.boolean "bnssa", default: false, null: false
+    t.boolean "pse1", default: false, null: false
+    t.boolean "pse2", default: false, null: false
     t.string "gender"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
