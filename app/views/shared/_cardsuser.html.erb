@@ -3,8 +3,7 @@
     <div class="card-product">
       <%= link_to("", user_path(lifeguard.id), class:"card-link")  %>
       <div class="card-product-infos">
-        <h2><%= lifeguard.full_name %></h2>
-        <h5><%= lifeguard.rank %></h5>
+        <h2><%= lifeguard.full_name %> - <i><%= lifeguard.rank %></i></h2>
         <p>Contact: <%= lifeguard.email%> - <%= lifeguard.mobile%> </p>
       </div>
      <% unless  %>
