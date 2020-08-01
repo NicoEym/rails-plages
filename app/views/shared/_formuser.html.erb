@@ -27,6 +27,10 @@
       <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon BNSSA ?" %>
       <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
       <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>
+      <% if current_user.admin %>
+        <%= f.input :head, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false, label: "Chef de poste?" %>
+      <% end %>
+
 
       <%= f.submit "Valider les informations", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
     <% end %>

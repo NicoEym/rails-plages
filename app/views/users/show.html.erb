@@ -3,13 +3,16 @@
     <div>
       <div class="row justify-center">
         <% unless  %>
-          <%= cl_image_tag @lifeguard.photo, class: "avatar-normal" %>
+          <%= cl_image_tag @lifeguard.photo, class: "avatar-show" %>
         <% else %>
-          <%= image_tag @lifeguard.avatar_url, class: "avatar-normal" %>
+          <%= image_tag @lifeguard.avatar_url, class: "avatar-show" %>
         <% end %>
       </div>
       <div class="row justify-center">
         <h2><%= @lifeguard.full_name %></h2>
+      </div>
+      <div class="row justify-center">
+        <h2><i><%= @lifeguard.rank %></i></h2>
       </div>
     </div>
 
