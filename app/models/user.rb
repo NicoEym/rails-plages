@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :team_lifeguards, dependent: :destroy
   has_many :teams, through: :team_lifeguards
+  has_many :availabilities
   has_one_attached :photo
 
   def full_name

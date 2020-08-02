@@ -40,7 +40,7 @@ class SeasonsController < ApplicationController
 
   private
 
-  def set_beach
+  def set_season
     @season = Season.find(params[:id])
     authorize @season
   end
