@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_30_010745) do
+ActiveRecord::Schema.define(version: 2020_08_03_231442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(version: 2020_07_30_010745) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "availabilties", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "calendar_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calendar_id"], name: "index_availabilties_on_calendar_id"
+    t.index ["user_id"], name: "index_availabilties_on_user_id"
+  end
+
   create_table "beaches", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -51,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_07_30_010745) do
     t.date "day"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "season_id"
+    t.index ["season_id"], name: "index_calendars_on_season_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -90,18 +101,24 @@ ActiveRecord::Schema.define(version: 2020_07_30_010745) do
     t.string "firstname"
     t.string "lastname"
     t.boolean "admin", default: false, null: false
-    t.boolean "head", default: false, null: false
-    t.boolean "bnssa", default: false, null: false
-    t.boolean "pse1", default: false, null: false
-    t.boolean "pse2", default: false, null: false
+    t.boolean "head"
+    t.boolean "bnssa"
+    t.boolean "pse1"
+    t.boolean "pse2"
     t.string "gender"
+    t.bigint "season_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["season_id"], name: "index_users_on_season_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "availabilties", "calendars"
+  add_foreign_key "availabilties", "users"
+  add_foreign_key "calendars", "seasons"
   add_foreign_key "team_lifeguards", "teams"
   add_foreign_key "team_lifeguards", "users"
   add_foreign_key "teams", "beaches"
   add_foreign_key "teams", "calendars"
+  add_foreign_key "users", "seasons"
 end
