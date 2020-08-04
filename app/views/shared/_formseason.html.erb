@@ -1,0 +1,15 @@
+<div class="log-form col-xs-12 col-md-4">
+  <% if current_page?(controller: 'season', action: 'new')  %>
+    <h2>Créer une nouvelle saison</h2>
+  <% else %>
+    <h2>Modifier la saison <%= @season.name%></h2>
+  <% end %>
+
+
+    <%= simple_form_for [@season]  do |f| %>
+      <%= f.input :name, label: 'Nom de la saison:'%>
+      <%= f.input  :start_date, as: :date, html5: true, label: "Date début de la saison:" %>
+      <%= f.input  :end_date, as: :date, html5: true, label: "Date fin de la saison:" %>
+      <%= f.submit "Valider la saison", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
+    <% end %>
+</div>

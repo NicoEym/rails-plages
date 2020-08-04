@@ -9,7 +9,7 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    @availability = Beach.new(availability_params)
+    @availability = Availability.new(availability_params)
     authorize @availability
     if @availability.save
       redirect_to season_path(@availability)
