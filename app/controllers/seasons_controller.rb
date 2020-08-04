@@ -6,9 +6,13 @@ class SeasonsController < ApplicationController
   end
 
   def create
-    @season = Beach.new(season_params)
+    @season = Season.new(season_params)
     authorize @season
     if @season.save
+      for day in start_date..end_date
+        new_date = Calendar.new(day: day, season: @season)
+        new_date.save
+      end
       redirect_to season_path(@season)
     else
       render :new
@@ -20,13 +24,15 @@ class SeasonsController < ApplicationController
   end
 
   def show
+    @dates = @season.calendars
   end
 
   def edit
   end
 
   def update
-    if @season.update(beach_params)
+    if @season.update(season_params)
+
       redirect_to season_path(@season)
     else
       render :edit
@@ -46,6 +52,6 @@ class SeasonsController < ApplicationController
   end
 
   def season_params
-    params.require(:season).permit(:name, :address, :latitude, :longitude, :number_of_team_members,:photo_url)
+    params.require(:season).permit(:name, :start_date, :end_date)
   end
 end
