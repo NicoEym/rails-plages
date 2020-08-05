@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
 
   def new
     @date = Calendar.find(params[:calendar_id])
+    @season = @date.season
     @beach = Beach.find(params[:beach_id])
     @team = Team.new
     authorize @team

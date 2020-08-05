@@ -2,7 +2,7 @@
   <% @dates.each do |date| %>
     <div class="col-xs-12 col-md-4">
       <div class="card-date" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
-      <%= link_to("", season_calendar_path(date.id), class:"card-link")  %>
+      <%= link_to("", season_calendar_path(@season, date), class:"card-link")  %>
        <div>
         <h3><%= date.day.strftime("%d-%m-%Y") %></h3>
         </div>
