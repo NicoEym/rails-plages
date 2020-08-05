@@ -22,10 +22,11 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     authorize @team
     puts team_params
+
     @team.calendar = Calendar.find(params[:calendar_id])
     @team.beach = Beach.find(params[:beach_id])
     if @team.save
-      redirect_to calendar_path(@team.calendar)
+      redirect_to season_calendar_path(@team.calendar.season, @team.calendar)
     else
       @team.team_lifeguards.new unless @team.team_lifeguards.any?
       render :new
