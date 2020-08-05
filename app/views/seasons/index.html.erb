@@ -1,0 +1,9 @@
+<br>
+  <div class="container">
+    <h1 class="text-center">Mes saisons</h1>
+    <% if policy(@season).new? %>
+        <%= link_to raw('<button type="button" class="btn btn-primary">Créer une nouvelle saison</button>'), new_beach_path(@season) %>
+      <% end %>
+    <%= render 'shared/cardsseason', seasons: @seasons %>
+  </div>
+<br>

@@ -3,13 +3,14 @@ class SeasonsController < ApplicationController
 
   def new
     @season = Season.new
+    authorize @season
   end
 
   def create
     @season = Season.new(season_params)
     authorize @season
     if @season.save
-      for day in start_date..end_date
+      for day in @season.start_date..@season.end_date
         new_date = Calendar.new(day: day, season: @season)
         new_date.save
       end
@@ -21,6 +22,7 @@ class SeasonsController < ApplicationController
 
   def index
     @seasons = policy_scope(Season)
+    @season = Season.new
   end
 
   def show
