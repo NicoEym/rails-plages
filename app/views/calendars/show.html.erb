@@ -1,5 +1,6 @@
 <br>
   <div class="container">
+    <h2><%= link_to("Revenir au calendrier", @date.season) %></h2>
     <h1 class="text-center"><%=@date.day %></h1>
       <% if @beaches.empty? %>
         <p>Vous devez d'abord créer vos plages avant de pouvoir créer des équipes.</p>

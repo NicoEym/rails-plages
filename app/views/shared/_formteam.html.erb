@@ -5,7 +5,7 @@
       <h2>Modifier l'équipe</h2>
   <% end %>
 
-  <%= simple_form_for [@date, @beach, @team], html: { class: "form-group"} do |f| %>
+  <%= simple_form_for [@season, @date, @beach, @team], html: { class: "form-group"} do |f| %>
     <%= f.input :beach_id, collection: [@beach], selected: @beach, input_html: { readonly: true}, label: "Plage:" %>
     <%= f.input :calendar_id, collection: [@date], selected: @date, label_method: :day, :input_html => {  readonly: true }, label: "Date:" %>
 
