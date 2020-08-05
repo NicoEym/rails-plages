@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :teams, only: [:index]
   resources :beaches
 
-  resources :season do
+  resources :seasons do
     resources :calendars do
       resources :beaches do
         resources :teams, only: [:new, :create, :edit, :update, :destroy] do

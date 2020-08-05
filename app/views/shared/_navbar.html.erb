@@ -15,7 +15,7 @@
       <% if user_signed_in? %>
           <% if current_user.admin? %>
               <li class="nav-item">
-              <%= link_to "Planning", calendars_path, class: "nav-link white-color" %>
+              <%= link_to "Mes saisons", seasons_path, class: "nav-link white-color" %>
               </li>
               <li class="nav-item">
                 <%= link_to "Sauveteurs", users_path, class: "nav-link white-color" %>

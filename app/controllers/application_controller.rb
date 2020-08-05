@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_up_path_for(resource)
     if current_user.admin?
-      "/calendars/"# <- Path you want to redirect the user to.
+       Season.count == 0 ? "/seasons/new" : "/seasons/"# <- Path you want to redirect the user to.
     else
       "/teams/"
     end
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if current_user.admin?
-      "/calendars/"# <- Path you want to redirect the user to.
+      Season.count == 0 ? "/seasons/new" : "/seasons/"# <- Path you want to redirect the user to.
     else
       edit_user_path(resource)
     end
