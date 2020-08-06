@@ -1,6 +1,6 @@
-class CreateAvailabilties < ActiveRecord::Migration[5.2]
+class CreateAvailabilities < ActiveRecord::Migration[5.2]
   def change
-    create_table :availabilties do |t|
+    create_table :availabilities do |t|
       t.references :user, foreign_key: true
       t.references :calendar, foreign_key: true
 

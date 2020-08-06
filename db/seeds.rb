@@ -5,17 +5,11 @@ require "open-uri"
 TeamLifeguard.delete_all
 
 Team.delete_all
-Calendar.delete_all
+
 Beach.delete_all
 User.delete_all
 
-
-for i in 0..10
-  dates = Date.today + i
-  Calendar.create(day: dates)
-  puts dates
-end
-
+season = Season.first
 
 user = User.new(
 
@@ -26,7 +20,8 @@ user = User.new(
   avatar_url: "https://i.pravatar.cc/150?img=65",
   admin: true,
   password:  'adminPlage',
-  password_confirmation: 'adminPlage'
+  password_confirmation: 'adminPlage',
+  season: season
 )
 
 user.save!
@@ -41,7 +36,8 @@ user = User.new(
   admin: false,
   head: true,
   password:  'hamid2020',
-  password_confirmation: 'hamid2020'
+  password_confirmation: 'hamid2020',
+  season: season
 )
 user.save!
 
@@ -54,7 +50,8 @@ user = User.new(
   admin: false,
   head: true,
   password:  'benjamin2020',
-  password_confirmation: 'benjamin2020'
+  password_confirmation: 'benjamin2020',
+  season: season
 )
 user.save!
 
@@ -67,7 +64,8 @@ user = User.new(
   admin: false,
   head: true,
   password:  'Ines2020',
-  password_confirmation: 'Ines2020'
+  password_confirmation: 'Ines2020',
+  season: season
 )
 user.save!
 
@@ -94,7 +92,8 @@ for i in 2..10
     head: true,
     avatar_url: "https://i.pravatar.cc/150?img=#{i}",
     password:  'valid_password',
-    password_confirmation: 'valid_password'
+    password_confirmation: 'valid_password',
+    season: season
   )
   user.save!
 end
@@ -108,7 +107,8 @@ for i in 11..40
     head: false,
     avatar_url: "https://i.pravatar.cc/150?img=#{i}",
     password:  'valid_password',
-    password_confirmation: 'valid_password'
+    password_confirmation: 'valid_password',
+    season: season
   )
   user.save!
 end

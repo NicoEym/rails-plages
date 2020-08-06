@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_04_231238) do
+ActiveRecord::Schema.define(version: 2020_08_06_013025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,13 @@ ActiveRecord::Schema.define(version: 2020_08_04_231238) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "availabilties", force: :cascade do |t|
+  create_table "availabilities", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["calendar_id"], name: "index_availabilties_on_calendar_id"
-    t.index ["user_id"], name: "index_availabilties_on_user_id"
+    t.index ["calendar_id"], name: "index_availabilities_on_calendar_id"
+    t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
 
   create_table "beaches", force: :cascade do |t|
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(version: 2020_08_04_231238) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "availabilties", "calendars"
-  add_foreign_key "availabilties", "users"
+  add_foreign_key "availabilities", "calendars"
+  add_foreign_key "availabilities", "users"
   add_foreign_key "calendars", "seasons"
   add_foreign_key "team_lifeguards", "teams"
   add_foreign_key "team_lifeguards", "users"
