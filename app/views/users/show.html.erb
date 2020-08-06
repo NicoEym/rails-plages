@@ -33,8 +33,8 @@
         </div>
       <div>
         <br>
-        <br>
-        <h2><b>Disponibilités:</b></h2>
+
+
       </div>
     <% end %>
 
@@ -46,6 +46,16 @@
         <% if policy(@lifeguard).destroy? %>
            <%= link_to raw('<button type="button" class="btn btn-danger">Supprimer le profil</button>'), user_path(@lifeguard), method: :delete %>
       <% end %>
+         <br>
+      <h2><b>Disponibilités:</b></h2>
+        <% if policy(@lifeguard).new? %>
+            <% if @lifeguard.availabilities.nil? %>
+            <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les informations</button>'), new_user_availability_path(@lifeguard) %>
+              <% else %>
+              <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les informations</button>'), edit_user_availability_path(@availabilies, @lifeguard) %>
+            <% end %>
+
+        <% end %>
     </div>
   </div>
 <br>
