@@ -48,11 +48,11 @@
       <% end %>
          <br>
       <h2><b>Disponibilités:</b></h2>
-        <% if policy(@lifeguard).new? %>
-            <% if @lifeguard.availabilities.nil? %>
-            <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les informations</button>'), new_user_availability_path(@lifeguard) %>
+        <% if policy(@lifeguard).edit?%>
+            <% if @lifeguard.availabilities.empty? %>
+            <%= link_to raw('<button type="button" class="btn btn-secondary">Créer mes disponibilités</button>'), new_user_availability_path(@lifeguard) %>
               <% else %>
-              <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les informations</button>'), edit_user_availability_path(@availabilies, @lifeguard) %>
+              <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mes disponibilités</button>'), edit_user_availability_path(@lifeguard) %>
             <% end %>
 
         <% end %>

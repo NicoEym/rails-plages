@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :team_lifeguards, dependent: :destroy
   has_many :teams, through: :team_lifeguards
   has_many :availabilities
+  accepts_nested_attributes_for :availabilities, allow_destroy: true
   has_one_attached :photo
 
   def full_name
@@ -55,5 +56,9 @@ class User < ApplicationRecord
 
   def pse2?
     pse2 == true ? "Oui" : "Non"
+  end
+
+  def days_available
+    availabilities.where(available: true)
   end
 end
