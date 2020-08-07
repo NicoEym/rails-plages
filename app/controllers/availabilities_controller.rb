@@ -4,8 +4,10 @@ class AvailabilitiesController < ApplicationController
   def new
     @user = current_user
     @season = @user.season
-    @calendars = @season.calendar.all
-    @calendars.count.times { @user.availability.build }
+    @calendars = @season.calendars
+    @calendars.count.times { @user.availabilities.build }
+    @availability = Availability.new(user: @user)
+    authorize @availability
   end
 
   def create

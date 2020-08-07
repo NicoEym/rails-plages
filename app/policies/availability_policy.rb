@@ -5,6 +5,10 @@ class AvailabilityPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    user_profile_or_user_is_admin?
+  end
+
   def index?
     user_profile_or_user_is_admin?
   end
@@ -24,6 +28,6 @@ class AvailabilityPolicy < ApplicationPolicy
   private
 
   def user_profile_or_user_is_admin?
-    @user.admin? || @record == user
+    @user.admin? || @record.user == user
   end
 end

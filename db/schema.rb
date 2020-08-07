@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_013025) do
+ActiveRecord::Schema.define(version: 2020_08_07_021158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_08_06_013025) do
     t.bigint "calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "available"
     t.index ["calendar_id"], name: "index_availabilities_on_calendar_id"
     t.index ["user_id"], name: "index_availabilities_on_user_id"
   end
