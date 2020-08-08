@@ -11,6 +11,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @season = @lifeguard.season
+    @calendars = @season.calendars
+    @number_of_days = @calendars.all.count - 1
+    @calendars.each do |calendar|
+      @lifeguard.availabilities.build(:user => @lifeguard, :calendar => calendar)
+    end
   end
 
   def update
@@ -42,6 +48,7 @@ class UsersController < ApplicationController
   end
 
   def lifeguard_params
-    params.require(:user).permit(:firstname, :lastname, :mobile, :photo, :bnssa, :pse1, :pse2)
+    params.require(:user).permit(:firstname, :lastname, :mobile, :photo, :bnssa, :pse1, :pse2,
+                                  availabilities_attributes: [:id, :user_id, :calendar_id, :available, :_destroy])
   end
 end
