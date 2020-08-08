@@ -1,19 +1,18 @@
-<div class="log-form col-xs-12 col-md-4">
+<!-- <div class="log-form col-xs-12 col-md-4">
   <% if current_page?(controller: 'availabilities', action: 'new')  %>
       <h2>Créer mes dispos</h2>
   <% else %>
       <h2>Modifier mes dispos</h2>
   <% end %>
 
-  <%= simple_form_for [@user], html: { class: "form-group"} do |f| %>
-    <%= f.input :beach_id, collection: [@beach], selected: @beach, input_html: { readonly: true}, label: "Plage:" %>
-
-    <h5>Equipiers:</h5>
-    <% for i in 1..@calendars.count %>
-      <%= f.fields_for :availabilities, @user.availabilities[i] do |ff| %>
-        <%= ff.input :available, collection:[true, false], label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: false %>
-      <% end %>
+  <%= simple_form_for [@user, @user_availabilities], html: { class: "form-group"} do |f| %>
+    <% @availabilities.each do |availability| %>
+    <h5>Dispo le <%= availability.calendar.day %></h5>
+      <%= f.input :available, collection:[true, false], label_method: :full_name, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: false %>
     <% end %>
+
+
     <%= f.button :submit, "Valider mes dispos",id: "submit-team", class: "btn btn-lg btn-primary blue-nav col-xs-9 col-md-12" %>
   <% end %>
 </div>
+ -->
