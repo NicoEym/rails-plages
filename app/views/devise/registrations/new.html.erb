@@ -32,15 +32,6 @@
                   autofocus: true,
                   label: "Téléphone portable:" %>
       <%= f.input :photo, as: :file, label: "Photo de profil:" %>
-      <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon BNSSA ?" %>
-      <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
-      <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>
-
-      <% for i in 0..@number_of_days %>
-        <%= f.fields_for :availabilities, @lifeguard.availabilities[i] do |ff| %>
-          <%= ff.input :available, as: :radio_buttons, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: "Je suis dispo pour travailler le #{@lifeguard.availabilities[i].calendar.day.strftime('%d-%m-%Y')}?" %>
-        <% end %>
-      <% end %>
     </div>
 
     <div class="form-actions">

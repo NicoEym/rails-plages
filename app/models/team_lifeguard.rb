@@ -1,4 +1,4 @@
 class TeamLifeguard < ApplicationRecord
-  belongs_to :user
+  belongs_to :lifeguard
   belongs_to :team
 end
