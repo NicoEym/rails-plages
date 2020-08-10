@@ -13,10 +13,11 @@ class UsersController < ApplicationController
   def edit
     @season = @lifeguard.season
     @calendars = @season.calendars
+    @availabilities = @lifeguard.availabilities
     @number_of_days = @calendars.all.count - 1
-    @calendars.each do |calendar|
-      @lifeguard.availabilities.build(:user => @lifeguard, :calendar => calendar)
-    end
+    # @calendars.each do |calendar|
+    #   @lifeguard.availabilities.build(:user => @lifeguard, :calendar => calendar)
+    # end
   end
 
   def update
