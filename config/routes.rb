@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users
+  resources :users do
+    resources :lifeguards, only: [:new, :create, :edit, :update]
+  end
 
+  resources :lifeguards, only: [:index]
   resources :teams, only: [:index]
   resources :beaches
 

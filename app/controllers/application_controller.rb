@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     if current_user.admin?
       Season.count == 0 ? "/seasons/new" : "/seasons/"# <- Path you want to redirect the user to.
     else
-      edit_user_path(resource)
+      user_path(resource)
     end
   end
 

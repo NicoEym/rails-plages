@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_07_021158) do
+ActiveRecord::Schema.define(version: 2020_08_10_013242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 2020_08_07_021158) do
   end
 
   create_table "availabilities", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "lifeguard_id"
     t.bigint "calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "available"
     t.index ["calendar_id"], name: "index_availabilities_on_calendar_id"
-    t.index ["user_id"], name: "index_availabilities_on_user_id"
+    t.index ["lifeguard_id"], name: "index_availabilities_on_lifeguard_id"
   end
 
   create_table "beaches", force: :cascade do |t|
@@ -65,6 +65,19 @@ ActiveRecord::Schema.define(version: 2020_08_07_021158) do
     t.index ["season_id"], name: "index_calendars_on_season_id"
   end
 
+  create_table "lifeguards", force: :cascade do |t|
+    t.boolean "head"
+    t.boolean "bnssa"
+    t.boolean "pse1"
+    t.boolean "pse2"
+    t.bigint "user_id"
+    t.bigint "season_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_lifeguards_on_season_id"
+    t.index ["user_id"], name: "index_lifeguards_on_user_id"
+  end
+
   create_table "seasons", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -74,12 +87,12 @@ ActiveRecord::Schema.define(version: 2020_08_07_021158) do
   end
 
   create_table "team_lifeguards", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "lifeguard_id"
     t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["lifeguard_id"], name: "index_team_lifeguards_on_lifeguard_id"
     t.index ["team_id"], name: "index_team_lifeguards_on_team_id"
-    t.index ["user_id"], name: "index_team_lifeguards_on_user_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -104,24 +117,19 @@ ActiveRecord::Schema.define(version: 2020_08_07_021158) do
     t.string "firstname"
     t.string "lastname"
     t.boolean "admin", default: false, null: false
-    t.boolean "head"
-    t.boolean "bnssa"
-    t.boolean "pse1"
-    t.boolean "pse2"
     t.string "gender"
-    t.bigint "season_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["season_id"], name: "index_users_on_season_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "availabilities", "calendars"
-  add_foreign_key "availabilities", "users"
+  add_foreign_key "availabilities", "users", column: "lifeguard_id"
   add_foreign_key "calendars", "seasons"
+  add_foreign_key "lifeguards", "seasons"
+  add_foreign_key "lifeguards", "users"
   add_foreign_key "team_lifeguards", "teams"
-  add_foreign_key "team_lifeguards", "users"
+  add_foreign_key "team_lifeguards", "users", column: "lifeguard_id"
   add_foreign_key "teams", "beaches"
   add_foreign_key "teams", "calendars"
-  add_foreign_key "users", "seasons"
 end

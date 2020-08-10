@@ -101,7 +101,7 @@ class TeamsController < ApplicationController
 
   def look_for_available_headlifeguard(every_team_on_that_day)
     # we get all the head lifeguards that can work
-    @available_heads = User.head_lifeguard
+    @available_heads = Lifeguard.head_lifeguard
     # for each team on that day
     every_team_on_that_day.each do |team|
       puts "All heads #{@available_heads}"
@@ -115,7 +115,7 @@ class TeamsController < ApplicationController
 
   def look_for_available_armlifeguard(every_team_on_that_day)
     # we get all the team lifeguards that can work
-    @available_arms = User.arm_lifeguard
+    @available_arms = Lifeguard.arm_lifeguard
     # for each team on that day
     every_team_on_that_day.each do |team|
        # we get the user
@@ -125,6 +125,6 @@ class TeamsController < ApplicationController
   end
 
   def team_params
-    params.require(:team).permit(:calendar_id, :beach_id, team_lifeguards_attributes: [:id, :user_id, :_destroy])
+    params.require(:team).permit(:calendar_id, :beach_id, team_lifeguards_attributes: [:id, :lifeguard_id, :_destroy])
   end
 end

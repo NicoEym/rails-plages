@@ -1,29 +1,15 @@
 <div class="log-form overflow col-xs-12 col-md-4">
-  <% if current_page?(controller: 'users', action: 'new')  %>
+  <% if current_page?(controller: 'lifeguards', action: 'new')  %>
       <h2>Nouveau sauveteur:</h2>
   <% else %>
       <h2>Modifier profil:</h2>
   <% end %>
 
 
-    <%= simple_form_for [@lifeguard]  do |f| %>
-      <%= f.input :firstname,
-                  required: true,
-                  autofocus: true,
-                  label: "Prénom:"%>
-      <%= f.input :lastname,
-                  required: true,
-                  autofocus: true,
-                  label: "Nom:" %>
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  label: "Adresse email" %>
-      <%= f.input :mobile,
-                  required: true,
-                  autofocus: true,
-                  label: "Téléphone portable:" %>
-      <%= f.input :photo, as: :file, label: "Photo de profil:" %>
+    <%= simple_form_for [@user, @lifeguard]  do |f| %>
+       <%= f.input :user_id, collection: [@user], selected: @user, label_method: :full_name, input_html: { readonly: true}, label: "Profil:" %>
+      <%= f.input :season_id, collection: [@season], selected: @season, label_method: :name, :input_html => {  readonly: true }, label: "Saison:" %>
+
       <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon BNSSA ?" %>
       <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
       <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>

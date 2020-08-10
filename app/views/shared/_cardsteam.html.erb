@@ -27,27 +27,27 @@
           <% unless team.nil? %>
             <div class="card-lifeguards flex width100 padding1 horizontal-scroll">
               <% head_lifeguard = team.head.first %>
-              <%= link_to user_path(head_lifeguard.id) do %>
+              <%= link_to user_path(head_lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
                     <% unless  %>
-                      <%= cl_image_tag head_lifeguard.photo, class: "avatar-large" %>
+                      <%= cl_image_tag head_lifeguard.user.photo, class: "avatar-large" %>
                       <% else %>
-                      <%= image_tag head_lifeguard.avatar_url, class: "avatar-large" %>
+                      <%= image_tag head_lifeguard.user.avatar_url, class: "avatar-large" %>
                     <% end %>
 
-                    <p><%= head_lifeguard.full_name %></p>
+                    <p><%= head_lifeguard.user.full_name %></p>
                 </div>
               <% end %>
                 <% team.lifeguards.each do |lifeguard| %>
-                  <%= link_to user_path(lifeguard.id) do %>
+                  <%= link_to user_path(lifeguard.user.id) do %>
                     <div class="lifeguard-profile">
                     <% unless %>
-                      <%= cl_image_tag lifeguard.photo, class: "avatar-large" %>
+                      <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
                     <% else %>
-                      <%= image_tag lifeguard.avatar_url, class: "avatar-large" %>
+                      <%= image_tag lifeguard.user.avatar_url, class: "avatar-large" %>
                     <% end %>
 
-                      <p><%= lifeguard.full_name %></p>
+                      <p><%= lifeguard.user.full_name %></p>
                     </div>
                   <%end %>
               <%end%>

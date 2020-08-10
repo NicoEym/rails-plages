@@ -11,25 +11,25 @@
             </div>
             <div class="card-lifeguards flex width100 padding1 horizontal-scroll">
               <% head_lifeguard = this_day_program[:team].head.first %>
-              <%= link_to user_path(head_lifeguard.id) do %>
+              <%= link_to user_path(head_lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
                   <% unless  %>
-                    <%= cl_image_tag head_lifeguard.photo, class: "avatar-large" %>
+                    <%= cl_image_tag head_lifeguard.user.photo, class: "avatar-large" %>
                   <% else %>
-                    <%= image_tag head_lifeguard.avatar_url, class: "avatar-large" %>
+                    <%= image_tag head_lifeguard.user.avatar_url, class: "avatar-large" %>
                   <% end %>
-                  <%= head_lifeguard.full_name %>
+                  <%= head_lifeguard.user.full_name %>
                 </div>
               <% end %>
               <% this_day_program[:team].lifeguards.each do |lifeguard| %>
-                <%= link_to user_path(lifeguard.id) do %>
+                <%= link_to user_path(lifeguard.user.id) do %>
                   <div class="lifeguard-profile">
                     <% unless %>
-                        <%= cl_image_tag lifeguard.photo, class: "avatar-large" %>
+                        <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
                     <% else %>
-                        <%= image_tag lifeguard.avatar_url, class: "avatar-large" %>
+                        <%= image_tag lifeguard.user.avatar_url, class: "avatar-large" %>
                     <% end %>
-                    <%= lifeguard.full_name %>
+                    <%= lifeguard.user.full_name %>
                   </div>
                 <% end%>
               <% end%>
