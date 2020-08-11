@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="row justify-center">
-        <% unless  %>
+        <% unless @user.photo.nil? %>
           <%= cl_image_tag @user.photo, class: "avatar-show" %>
         <% else %>
           <%= image_tag @user.avatar_url, class: "avatar-show" %>
@@ -11,9 +11,11 @@
       <div class="row justify-center">
         <h2><%= @user.full_name %></h2>
       </div>
-      <div class="row justify-center">
-        <h2><i><%= @user.lifeguard.rank %></i></h2>
-      </div>
+      <% unless @user.lifeguard.nil? %>
+        <div class="row justify-center">
+          <h2><i><%= @user.lifeguard.rank %></i></h2>
+        </div>
+      <% end %>
     </div>
 
     <br>
@@ -49,7 +51,7 @@
          <br>
       <h2><b>Mes diplômes, mes dispos:</b></h2>
         <% if policy(@lifeguard).new?%>
-            <% if @lifeguard.empty? %>
+            <% if @lifeguard.availabilities.empty? %>
             <%= link_to raw('<button type="button" class="btn btn-secondary">Créer mes disponibilités</button>'), new_user_lifeguard_path(@user) %>
               <% else %>
               <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mes disponibilités</button>'), edit_user_lifeguard_path(@user) %>

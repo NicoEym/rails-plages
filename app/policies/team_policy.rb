@@ -2,7 +2,7 @@ class TeamPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       # @scope.with(@user)
-      @user.teams
+      @user.lifeguard.teams
     end
   end
 
