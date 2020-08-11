@@ -1,14 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  protect_from_forgery with: :exception
 
-  def configure_permitted_parameters
-    # For additional fields in app/views/devise/registrations/new.html.erb
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :mobile, :photo])
-
-    # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :mobile, :photo])
-  end
 
   include Pundit
 
@@ -37,6 +31,17 @@ class ApplicationController < ActionController::Base
     else
       user_path(resource)
     end
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    puts "toto"
+    # For additional fields in app/views/devise/registrations/new.html.erb
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname, :mobile, :photo])
+
+    # For additional in app/views/devise/registrations/edit.html.erb
+    devise_parameter_sanitizer.permit(:account_update, keys: [:firstname, :lastname, :mobile, :photo])
   end
 
   private

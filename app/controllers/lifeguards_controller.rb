@@ -16,10 +16,11 @@ class LifeguardsController < ApplicationController
 
   def create
     @lifeguard = Lifeguard.new(lifeguard_params)
+    @user = User.find_by(id: 669)
     authorize @lifeguard
 
     if @lifeguard.save
-      redirect_to season_calendar_path(@team.calendar.season, @team.calendar)
+      redirect_to user_path(@user)
     else
       @lifeguard.availabilities.new unless @lifeguard.availabilities.any?
       render :new
