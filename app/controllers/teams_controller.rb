@@ -21,7 +21,6 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
     authorize @team
-    puts team_params
 
     @team.calendar = Calendar.find(params[:calendar_id])
     @team.beach = Beach.find(params[:beach_id])
