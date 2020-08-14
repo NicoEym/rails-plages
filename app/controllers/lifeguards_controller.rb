@@ -2,25 +2,22 @@ class LifeguardsController < ApplicationController
   before_action :set_lifeguard, only: [:show, :edit, :update, :destroy]
 
   def new
-    @user = User.find(params[:user_id])
-    @season = Season.first
+    set_variables
     @lifeguard = Lifeguard.new(user: @user, season: @season)
     authorize @lifeguard
-    @calendars = @season.calendars
-    @availabilities = @lifeguard.availabilities
-    @number_of_days = @calendars.all.count - 1
-    @calendars.each do |calendar|
-      @lifeguard.availabilities.build(:lifeguard => @lifeguard, :calendar => calendar)
-    end
+    set_availabilities
+
   end
 
   def create
+    set_variables
+
     @lifeguard = Lifeguard.new(lifeguard_params)
-    @user = User.find_by(id: 669)
+    set_availabilities
     authorize @lifeguard
 
     if @lifeguard.save
-      redirect_to user_path(@user)
+      redirect_to user_path(@current_user)
     else
       @lifeguard.availabilities.new unless @lifeguard.availabilities.any?
       render :new
@@ -65,6 +62,20 @@ class LifeguardsController < ApplicationController
   end
 
   private
+
+  def set_availabilities
+    @availabilities = @lifeguard.availabilities
+    @calendars.each do |calendar|
+      @lifeguard.availabilities.build(:lifeguard => @lifeguard, :calendar => calendar)
+    end
+  end
+
+  def set_variables
+    @user = User.find(params[:user_id])
+    @season = Season.first
+    @calendars = @season.calendars
+    @number_of_days = @calendars.all.count - 1
+  end
 
   def set_lifeguard
     @lifeguard = Lifeguard.find(params[:id])

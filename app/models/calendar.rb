@@ -4,4 +4,3 @@ class Calendar < ApplicationRecord
   has_many :teams
   has_many :availabilities
 end
-
