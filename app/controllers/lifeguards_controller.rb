@@ -6,14 +6,12 @@ class LifeguardsController < ApplicationController
     @lifeguard = Lifeguard.new(user: @user, season: @season)
     authorize @lifeguard
     set_availabilities
-
   end
 
   def create
     set_variables
 
     @lifeguard = Lifeguard.new(lifeguard_params)
-    set_availabilities
     authorize @lifeguard
 
     if @lifeguard.save

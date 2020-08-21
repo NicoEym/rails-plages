@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <div class="row justify-center">
-        <% unless @user.photo.nil? %>
+        <% if @user.photo.attached? %>
           <%= cl_image_tag @user.photo, class: "avatar-show" %>
         <% else %>
           <%= image_tag @user.avatar_url, class: "avatar-show" %>
