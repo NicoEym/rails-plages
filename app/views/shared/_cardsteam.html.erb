@@ -29,7 +29,7 @@
               <% head_lifeguard = team.head.first %>
               <%= link_to user_path(head_lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
-                    <% unless  %>
+                    <% if head_lifeguard.user.photo.attached? %>
                       <%= cl_image_tag head_lifeguard.user.photo, class: "avatar-large" %>
                       <% else %>
                       <%= image_tag head_lifeguard.user.avatar_url, class: "avatar-large" %>
@@ -41,7 +41,7 @@
                 <% team.lifeguards.each do |lifeguard| %>
                   <%= link_to user_path(lifeguard.user.id) do %>
                     <div class="lifeguard-profile">
-                    <% unless %>
+                    <% if lifeguard.user.photo.attached? %>
                       <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
                     <% else %>
                       <%= image_tag lifeguard.user.avatar_url, class: "avatar-large" %>

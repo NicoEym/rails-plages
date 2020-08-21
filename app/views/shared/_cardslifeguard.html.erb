@@ -6,11 +6,11 @@
         <h2><%= lifeguard.user.full_name %> - <i><%= lifeguard.rank %></i></h2>
         <p>Contact: <%= lifeguard.user.email%> - <%= lifeguard.user.mobile%> </p>
       </div>
-     <% unless  %>
+     <% if lifeguard.user.photo.attached? %>
           <%= cl_image_tag lifeguard.user.photo, class: "avatar-large" %>
         <% else %>
           <%= image_tag lifeguard.user.avatar_url, class: "avatar-large" %>
-        <% end %>
+      <% end %>
     </div>
   </div>
 <% end %>

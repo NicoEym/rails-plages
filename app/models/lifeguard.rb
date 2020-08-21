@@ -5,7 +5,7 @@ class Lifeguard < ApplicationRecord
   has_many :team_lifeguards, dependent: :destroy
   has_many :teams, through: :team_lifeguards
   has_many :availabilities
-  accepts_nested_attributes_for :availabilities, allow_destroy: true
+  accepts_nested_attributes_for :availabilities, allow_destroy: true, reject_if: proc { |attributes| attributes['available'].blank? }
 
   def head?
     head == true
