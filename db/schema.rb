@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_013242) do
+ActiveRecord::Schema.define(version: 2020_08_25_013407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2020_08_10_013242) do
     t.bigint "calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "available"
+    t.boolean "available", default: false, null: false
     t.index ["calendar_id"], name: "index_availabilities_on_calendar_id"
     t.index ["lifeguard_id"], name: "index_availabilities_on_lifeguard_id"
   end
@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(version: 2020_08_10_013242) do
   end
 
   create_table "lifeguards", force: :cascade do |t|
-    t.boolean "head"
-    t.boolean "bnssa"
-    t.boolean "pse1"
-    t.boolean "pse2"
+    t.boolean "head", default: false, null: false
+    t.boolean "bnssa", default: false, null: false
+    t.boolean "pse1", default: false, null: false
+    t.boolean "pse2", default: false, null: false
     t.bigint "user_id"
     t.bigint "season_id"
     t.datetime "created_at", null: false
