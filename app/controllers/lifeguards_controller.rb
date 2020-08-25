@@ -6,9 +6,8 @@ class LifeguardsController < ApplicationController
     @lifeguard = Lifeguard.new(user: @user, season: @season)
     authorize @lifeguard
     @calendars.each do |calendar|
-       @lifeguard.availabilities.build(calendar: calendar)
+      @lifeguard.availabilities.build(calendar: calendar)
     end
-
   end
 
   def create
@@ -82,6 +81,6 @@ class LifeguardsController < ApplicationController
   end
 
   def lifeguard_params
-    params.require(:lifeguard).permit(:bnssa, :pse1, :pse2, :user_id, :season_id, availabilities_attributes: [:id, :lifeguard_id, :calendar_id, :available, :_destroy])
+    params.require(:lifeguard).permit(:bnssa, :pse1, :pse2, :user_id, :season_id, availabilities_attributes: [:id, :calendar_id, :available, :_destroy])
   end
 end
