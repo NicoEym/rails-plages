@@ -1,6 +1,5 @@
 class Lifeguard < ApplicationRecord
   belongs_to :user
-
   belongs_to :season
   has_many :team_lifeguards, dependent: :destroy
   has_many :teams, through: :team_lifeguards
