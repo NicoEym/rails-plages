@@ -17,7 +17,7 @@
         <%= f.input :head, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false, label: "Chef de poste?" %>
       <% end %>
 
-      <% for i in 0..@number_of_days %>
+      <% for i in 1..@number_of_days %>
         <%= f.fields_for :availabilities, @lifeguard.availabilities[i] do |ff| %>
           <%= ff.input :available, calendar_id: @lifeguard.availabilities[i].calendar.id, lifeguard_id: @lifeguard.id, as: :radio_buttons, prompt: "Choisir", required: true, input_html: { autocomplete: "Perfil"}, label: "Je suis dispo pour travailler le #{@lifeguard.availabilities[i].calendar.day.strftime('%d-%m-%Y')}?" %>
         <% end %>
