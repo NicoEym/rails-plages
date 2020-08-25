@@ -9,7 +9,6 @@ class TeamsController < ApplicationController
     @team = Team.new
     authorize @team
     teams_on_that_day = @date.teams
-    puts teams_on_that_day
     # We will load all the unaffected team mates
     @available_arms = look_for_available_armlifeguard(teams_on_that_day)
     # We will load all the unaffected head lifeguards
