@@ -51,7 +51,7 @@
          <br>
       <h2><b>Mes diplômes, mes dispos:</b></h2>
         <% if policy(@lifeguard).new?%>
-            <% if @lifeguard.availabilities.empty? %>
+            <% if @lifeguard.availabilities.any? %>
             <%= link_to raw('<button type="button" class="btn btn-secondary">Créer mes disponibilités</button>'), new_user_lifeguard_path(@user) %>
               <% else %>
               <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mes disponibilités</button>'), edit_user_lifeguard_path(@user) %>
