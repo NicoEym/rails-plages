@@ -1,5 +1,5 @@
 class LifeguardsController < ApplicationController
-  before_action :set_lifeguard, only: [:show, :edit, :update, :destroy]
+  before_action :set_lifeguard, only: [:edit, :update, :destroy]
 
   def new
     set_variables
@@ -39,6 +39,7 @@ class LifeguardsController < ApplicationController
     @calendars = @season.calendars
     @availabilities = @lifeguard.availabilities
     @number_of_days = @calendars.all.count - 1
+    puts @number_of_days
   end
 
   def update
@@ -69,14 +70,11 @@ class LifeguardsController < ApplicationController
     @season = Season.first
     @calendars = @season.calendars
     @number_of_days = @calendars.all.count - 1
-    @calendars_array = []
-    @calendars.each do |calendar|
-      @calendars_array << calendar
-    end
   end
 
   def set_lifeguard
-    @lifeguard = Lifeguard.find(params[:id])
+    @user = User.find(params[:id])
+    @lifeguard = @user.lifeguard
     authorize @lifeguard
   end
 

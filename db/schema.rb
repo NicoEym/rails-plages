@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_013407) do
+ActiveRecord::Schema.define(version: 2020_08_26_020506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,11 +37,11 @@ ActiveRecord::Schema.define(version: 2020_08_25_013407) do
   end
 
   create_table "availabilities", force: :cascade do |t|
-    t.bigint "lifeguard_id"
     t.bigint "calendar_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "available", default: false, null: false
+    t.bigint "lifeguard_id"
     t.index ["calendar_id"], name: "index_availabilities_on_calendar_id"
     t.index ["lifeguard_id"], name: "index_availabilities_on_lifeguard_id"
   end
@@ -87,10 +87,10 @@ ActiveRecord::Schema.define(version: 2020_08_25_013407) do
   end
 
   create_table "team_lifeguards", force: :cascade do |t|
-    t.bigint "lifeguard_id"
     t.bigint "team_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "lifeguard_id"
     t.index ["lifeguard_id"], name: "index_team_lifeguards_on_lifeguard_id"
     t.index ["team_id"], name: "index_team_lifeguards_on_team_id"
   end
@@ -124,12 +124,12 @@ ActiveRecord::Schema.define(version: 2020_08_25_013407) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "availabilities", "calendars"
-  add_foreign_key "availabilities", "users", column: "lifeguard_id"
+  add_foreign_key "availabilities", "lifeguards"
   add_foreign_key "calendars", "seasons"
   add_foreign_key "lifeguards", "seasons"
   add_foreign_key "lifeguards", "users"
+  add_foreign_key "team_lifeguards", "lifeguards"
   add_foreign_key "team_lifeguards", "teams"
-  add_foreign_key "team_lifeguards", "users", column: "lifeguard_id"
   add_foreign_key "teams", "beaches"
   add_foreign_key "teams", "calendars"
 end
