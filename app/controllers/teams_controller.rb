@@ -71,15 +71,17 @@ class TeamsController < ApplicationController
     for i in 0..6
       date = today + i
       date_for_test = Calendar.find_by(day: date)
-      # // for this date, if we have less team created than number of beaches, the plaaning has not been finalized yet
-      if date_for_test.teams.count < Beach.all.count
-        @user_program_for_the_next_7_days <<  { program: "Planning not created for this day", date: date_for_test }
-      # // we check if the user is affected to a beach. If it is not the case, we send a program Rest
-      elsif is_working_on_that_day?(date_for_test, @user_affected_teams) == false
-        @user_program_for_the_next_7_days <<  { program: "Rest", date: date_for_test }
-      # // we check if the user is affected to a beach. If it is  the case, we send a program Working with the details of the team
-      elsif is_working_on_that_day?(date_for_test, @user_affected_teams)
-        @user_program_for_the_next_7_days << { program: "Working", team: @user_affected_teams.find_by(calendar_id: date_for_test.id), date: date_for_test }
+      unless date_for_test.nil?
+        # // for this date, if we have less team created than number of beaches, the plaaning has not been finalized yet
+        if date_for_test.teams.count < Beach.all.count
+          @user_program_for_the_next_7_days <<  { program: "Planning not created for this day", date: date_for_test }
+        # // we check if the user is affected to a beach. If it is not the case, we send a program Rest
+        elsif is_working_on_that_day?(date_for_test, @user_affected_teams) == false
+          @user_program_for_the_next_7_days <<  { program: "Rest", date: date_for_test }
+        # // we check if the user is affected to a beach. If it is  the case, we send a program Working with the details of the team
+        elsif is_working_on_that_day?(date_for_test, @user_affected_teams)
+          @user_program_for_the_next_7_days << { program: "Working", team: @user_affected_teams.find_by(calendar_id: date_for_test.id), date: date_for_test }
+        end
       end
     end
     @user_program_for_the_next_7_days
