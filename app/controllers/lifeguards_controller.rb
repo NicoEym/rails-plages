@@ -37,14 +37,14 @@ class LifeguardsController < ApplicationController
   def edit
     @season = @lifeguard.season
     @calendars = @season.calendars
-    @availabilities = @lifeguard.availabilities
+    @lifeguard.availabilities = @lifeguard.availabilities.order('calendar_id asc')
     @number_of_days = @calendars.all.count - 1
-    puts @number_of_days
+    puts @lifeguard.availabilities
   end
 
   def update
     if @lifeguard.update(lifeguard_params)
-      redirect_to user_path(@lifeguard)
+      redirect_to user_path(@user)
     else
       render :edit
     end
@@ -73,8 +73,8 @@ class LifeguardsController < ApplicationController
   end
 
   def set_lifeguard
-    @user = User.find(params[:id])
-    @lifeguard = @user.lifeguard
+    @lifeguard = Lifeguard.find(params[:id])
+    @user = @lifeguard.user
     authorize @lifeguard
   end
 
