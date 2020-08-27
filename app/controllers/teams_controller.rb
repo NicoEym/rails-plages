@@ -10,9 +10,9 @@ class TeamsController < ApplicationController
     authorize @team
     teams_on_that_day = @date.teams
     # We will load all the unaffected team mates
-    @available_arms = look_for_available_armlifeguard(teams_on_that_day)
+    @available_arms = look_for_available_armlifeguard(teams_on_that_day, @date)
     # We will load all the unaffected head lifeguards
-    @available_heads = look_for_available_headlifeguard(teams_on_that_day)
+    @available_heads = look_for_available_headlifeguard(teams_on_that_day, @date)
     (@beach.number_of_team_members).times { @team.team_lifeguards.build }
     @team_mate_number = @beach.number_of_team_members - 1
   end
@@ -37,9 +37,9 @@ class TeamsController < ApplicationController
     @date = @team.calendar
     teams_on_that_day = @date.teams
 
-    @available_arms = look_for_available_armlifeguard(teams_on_that_day)
-    @available_heads = look_for_available_headlifeguard(teams_on_that_day)
-    @team.lifeguards.each  do |team_mate|
+    @available_arms = look_for_available_armlifeguard(teams_on_that_day, @date)
+    @available_heads = look_for_available_headlifeguard(teams_on_that_day, @date)
+    @team.lifeguards.each do |team_mate|
       @available_arms << team_mate
     end
     @available_heads << @team.head.first
@@ -99,9 +99,10 @@ class TeamsController < ApplicationController
     authorize @team
   end
 
-  def look_for_available_headlifeguard(every_team_on_that_day)
+  def look_for_available_headlifeguard(every_team_on_that_day, date)
     # we get all the head lifeguards that can work
     @available_heads = Lifeguard.head_lifeguard
+    @available_heads = @available_heads.available_on_that_date(date)
     # for each team on that day
     every_team_on_that_day.each do |team|
       puts "All heads #{@available_heads}"
@@ -113,12 +114,13 @@ class TeamsController < ApplicationController
     @available_heads
   end
 
-  def look_for_available_armlifeguard(every_team_on_that_day)
+  def look_for_available_armlifeguard(every_team_on_that_day, date)
     # we get all the team lifeguards that can work
     @available_arms = Lifeguard.arm_lifeguard
+    @available_arms = @available_arms.available_on_that_date(date)
     # for each team on that day
     every_team_on_that_day.each do |team|
-       # we get the user
+      # we get the user
       @available_arms = @available_arms - team.lifeguards
     end
     @available_arms

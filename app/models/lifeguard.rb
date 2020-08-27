@@ -22,6 +22,10 @@ class Lifeguard < ApplicationRecord
     where(head: false)
   end
 
+  def self.available_on_that_date(date)
+    joins(:availabilities).where(availabilities: {calendar: date, available: true})
+  end
+
   def rank
     head == true ? "Chef de poste" : "Equipier"
   end
