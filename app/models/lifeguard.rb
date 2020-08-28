@@ -6,19 +6,16 @@ class Lifeguard < ApplicationRecord
   has_many :availabilities
   accepts_nested_attributes_for :availabilities, allow_destroy: true, reject_if: proc { |attributes| attributes['available'].blank? }
 
-  def head?
-    head == true
-  end
 
   def name
     user.full_name
   end
 
-  def self.head_lifeguard
+  def self.head_lifeguards_all
     where(head: true)
   end
 
-  def self.arm_lifeguard
+  def self.arm_lifeguards_all
     where(head: false)
   end
 

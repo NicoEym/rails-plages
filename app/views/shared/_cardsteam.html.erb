@@ -26,7 +26,7 @@
 
           <% unless team.nil? %>
             <div class="card-lifeguards flex width100 padding1 horizontal-scroll">
-              <% head_lifeguard = team.head.first %>
+              <% head_lifeguard = team.head_lifeguard.first %>
               <%= link_to user_path(head_lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
                     <% if head_lifeguard.user.photo.attached? %>
@@ -38,7 +38,7 @@
                     <p><%= head_lifeguard.user.full_name %></p>
                 </div>
               <% end %>
-                <% team.lifeguards.each do |lifeguard| %>
+                <% team.arm_lifeguards.each do |lifeguard| %>
                   <%= link_to user_path(lifeguard.user.id) do %>
                     <div class="lifeguard-profile">
                     <% if lifeguard.user.photo.attached? %>
