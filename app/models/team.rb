@@ -5,11 +5,11 @@ class Team < ApplicationRecord
   has_many :lifeguards, through: :team_lifeguards
   accepts_nested_attributes_for :team_lifeguards, allow_destroy: true
 
-  def lifeguards
+  def arm_lifeguards
     lifeguards.where(head: false)
   end
 
-  def head
+  def head_lifeguard
     lifeguards.where(head: true)
   end
 

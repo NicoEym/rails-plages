@@ -101,14 +101,12 @@ class TeamsController < ApplicationController
 
   def look_for_available_headlifeguard(every_team_on_that_day, date)
     # we get all the head lifeguards that can work
-    @available_heads = Lifeguard.head_lifeguard
+    @available_heads = Lifeguard.head_lifeguards_all
     @available_heads = @available_heads.available_on_that_date(date)
     # for each team on that day
     every_team_on_that_day.each do |team|
-      puts "All heads #{@available_heads}"
-      puts "this chief #{team.head}"
       # we get the user
-      @available_heads = @available_heads - team.head
+      @available_heads = @available_heads - team.head_lifeguard
       # if the user is a team_mate, we take it out of the list of available team_mates
     end
     @available_heads
@@ -116,12 +114,12 @@ class TeamsController < ApplicationController
 
   def look_for_available_armlifeguard(every_team_on_that_day, date)
     # we get all the team lifeguards that can work
-    @available_arms = Lifeguard.arm_lifeguard
+    @available_arms = Lifeguard.arm_lifeguards_all
     @available_arms = @available_arms.available_on_that_date(date)
     # for each team on that day
     every_team_on_that_day.each do |team|
       # we get the user
-      @available_arms = @available_arms - team.lifeguards
+      @available_arms = @available_arms - team.arm_lifeguards
     end
     @available_arms
   end

@@ -10,7 +10,7 @@
               <h2>Plage <%= this_day_program[:team].beach.name %> - <%= this_day_program[:date].day.strftime("%d-%m-%Y") %></h2>
             </div>
             <div class="card-lifeguards flex width100 padding1 horizontal-scroll">
-              <% head_lifeguard = this_day_program[:team].head.first %>
+              <% head_lifeguard = this_day_program[:team].head_lifeguard.first %>
               <%= link_to user_path(head_lifeguard.user.id) do %>
                 <div class="lifeguard-profile">
                   <% if head_lifeguard.user.photo.attached? %>
@@ -21,7 +21,7 @@
                   <%= head_lifeguard.user.full_name %>
                 </div>
               <% end %>
-              <% this_day_program[:team].lifeguards.each do |lifeguard| %>
+              <% this_day_program[:team].arm_lifeguards.each do |lifeguard| %>
                 <%= link_to user_path(lifeguard.user.id) do %>
                   <div class="lifeguard-profile">
                     <% if lifeguard.user.photo.attached? %>

@@ -9,9 +9,8 @@ class LifeguardPolicy < ApplicationPolicy
     user_profile_or_user_is_admin?
   end
 
-
   def index?
-    user_is_admin?
+    true
   end
 
   def update?
