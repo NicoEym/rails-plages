@@ -26,21 +26,9 @@
       <h3><%= @user.email %></h3>
       <h3><%= @user.mobile %></h3>
     </div>
-    <% if policy(@user).edit? %>
-        <div>
-          <h2><b>Diplôme:</b></h2>
-          <h3>BNSSA ? <%= @user.lifeguard.bnssa? %></h3>
-          <h3>PSE 1 ? <%= @user.lifeguard.pse1? %></h3>
-          <h3>PSE 2?<%= @user.lifeguard.pse2? %></h3>
-        </div>
-      <div>
-        <br>
 
 
-      </div>
-    <% end %>
-
-      <div >
+  <div >
     <% if policy(@user).edit? %>
         <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mes informations personnelles</button>'), edit_user_path(@user) %>
         <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mot de passe</button>'), edit_user_registration_path(@user) %>
@@ -49,15 +37,22 @@
            <%= link_to raw('<button type="button" class="btn btn-danger">Supprimer le profil</button>'), user_path(@user), method: :delete %>
       <% end %>
          <br>
-      <h2><b>Mes diplômes, mes dispos:</b></h2>
+
+      <h2><b>Diplômes, Dispos:</b></h2>
+
         <% if policy(@lifeguard).new?%>
-            <%= puts @user.lifeguard.availabilities.inspect %>
+            <div>
+            <h2><b>Diplôme:</b></h2>
+            <h3>BNSSA ? <%= @user.lifeguard.bnssa? %></h3>
+            <h3>PSE 1 ? <%= @user.lifeguard.pse1? %></h3>
+            <h3>PSE 2?<%= @user.lifeguard.pse2? %></h3>
+          </div>
+          <br>
             <% if @lifeguard.availabilities.count == 0 %>
-            <%= link_to raw('<button type="button" class="btn btn-secondary">Créer mes disponibilités</button>'), new_user_lifeguard_path(@user) %>
-              <% else %>
+              <%= link_to raw('<button type="button" class="btn btn-secondary">Créer mes disponibilités</button>'), new_user_lifeguard_path(@user) %>
+            <% else %>
               <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mes disponibilités</button>'), edit_user_lifeguard_path(@user, @lifeguard) %>
             <% end %>
-
         <% end %>
     </div>
   </div>
