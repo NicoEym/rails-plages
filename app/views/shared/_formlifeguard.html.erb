@@ -20,8 +20,10 @@
       <% for i in 0..@number_of_days %>
 
         <%= f.fields_for :availabilities, @lifeguard.availabilities[i] do |ff| %>
-          <%= ff.input :calendar_id, collection: [@lifeguard.availabilities[i].calendar], selected: @lifeguard.availabilities[i].calendar, label_method: :day, input_html: { readonly: true}, input_html: { autocomplete: "Perfil"}, label: "Je suis dispo pour travailler le #{@lifeguard.availabilities[i].calendar.day.strftime('%d-%m-%Y')}?" %>
-          <%= ff.input :available, calendar_id: @lifeguard.availabilities[i].calendar.id, as: :radio_buttons, prompt: "Choisir", input_html: { autocomplete: "Perfil"}, label: false %>
+          <%= ff.input :calendar_id, :as => :hidden, collection: [@lifeguard.availabilities[i].calendar], selected: @lifeguard.availabilities[i].calendar, label_method: :day, input_html: { readonly: true}, input_html: { autocomplete: "Perfil"}, label: "Je suis dispo pour travailler le #{@lifeguard.availabilities[i].calendar.day.strftime('%d-%m-%Y')}?" %>
+          <%= ff.input_field :available, calendar_id: @lifeguard.availabilities[i].calendar.id, as: :radio_buttons, prompt: "Choisir", input_html: { autocomplete: "Perfil"}, label: false %>
+          <br>
+
         <% end %>
       <% end %>
 
