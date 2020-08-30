@@ -54,6 +54,12 @@
               <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier mes disponibilités</button>'), edit_user_lifeguard_path(@user, @lifeguard) %>
             <% end %>
         <% end %>
+
+        <% unless @availabilities.nil? %>
+          <%  @availabilities.each do |availability| %>
+              <%= availability.calendar.day %>
+            <% end %>
+        <% end %>
     </div>
   </div>
 <br>

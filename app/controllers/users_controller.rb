@@ -4,5 +4,6 @@ class UsersController < ApplicationController
     authorize @user
     @lifeguard = @user.lifeguard
     @lifeguard = Lifeguard.new(user: @user) if @lifeguard.nil?
+    @availabilities = @lifeguard.availabilities unless @lifeguard.availabilities.nil?
   end
 end
