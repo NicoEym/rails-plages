@@ -55,10 +55,20 @@
             <% end %>
         <% end %>
 
+        <br>
+        <br>
+
         <% unless @availabilities.nil? %>
-          <%  @availabilities.each do |availability| %>
-              <%= availability.calendar.day %>
+          <div class="row">
+            <% @availabilities.each do |availability| %>
+                <div class="col-xs-2 col-md-2">
+                  <div class="card-date" >
+                    <%= availability.available == true ? '<i class="fas fa-check-circle"></i> ' : '<i class="fas fa-times-circle"></i>' %>
+                    <%= availability.calendar.day.strftime("%d-%m-%Y") %>
+                  </div>
+                </div>
             <% end %>
+          </div>
         <% end %>
     </div>
   </div>
