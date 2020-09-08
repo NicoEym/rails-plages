@@ -5,13 +5,14 @@ class Calendar < ApplicationRecord
   has_many :availabilities
 
   def status
-    number_of_team_on_that_day == teams.count
+    number_of_team_on_that_day = teams.count
+
     if number_of_team_on_that_day == Beach.all.count
-      status == "completed"
+      status = "completed"
     elsif number_of_team_on_that_day > 0
-      status == "initiated"
+      status = "initiated"
     else
-      status == "uninitiated"
+      status = "uninitiated"
     end
   end
 end
