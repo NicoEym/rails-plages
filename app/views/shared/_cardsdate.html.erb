@@ -3,15 +3,15 @@
     <div class="col-xs-2 col-md-2">
       <div class="card-date" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60')">
         <%= link_to("", season_calendar_path(@season, date), class:"card-link")  %>
-         <div>
-            <h3><%= date.day.strftime("%d-%m-%Y") %></h3>
+          <div class="row justify-center">
+            <h4><%= date.day.strftime("%d-%m-%Y") %></h4>
             <% case date.status %>
               <% when "completed" then %>
-                <%= raw('Planning terminé <i class="fas fa-check-circle green"></i>') %>
+                <%= raw('Terminé <i class="fas fa-check-circle green"></i>') %>
               <% when "initiated" then %>
-                <%= raw('Planning non terminé <i class="fas fa-check-circle orange"></i>') %>
+                <%= raw('Non terminé <i class="fas fa-check-circle orange"></i>') %>
               <% when "uninitiated" then %>
-                <%= raw('Planning non commencé <i class="fas fa-times-circle red"></i>') %>
+                <%= raw('Non commencé <i class="fas fa-times-circle red"></i>') %>
             <% end %>
           </div>
       </div>
