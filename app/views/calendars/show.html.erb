@@ -1,11 +1,11 @@
 <br>
   <div class="container">
-    <h2><%= link_to("Revenir au calendrier", @date.season) %></h2>
     <h1 class="text-center"><%=@date.day %></h1>
       <% if @beaches.empty? %>
         <p>Vous devez d'abord créer vos plages avant de pouvoir créer des équipes.</p>
       <% else %>
         <%= render 'shared/cardsteam', beach: @beaches %>
       <% end %>
+      <h4><%= link_to(raw('<i class="fas fa-arrow-alt-circle-left"></i> Revenir au calendrier'), @date.season) %></h4>
   </div>
 <br>

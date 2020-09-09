@@ -7,11 +7,14 @@
             <h4><%= date.day.strftime("%d-%m-%Y") %></h4>
             <% case date.status %>
               <% when "completed" then %>
-                <%= raw('Terminé <i class="fas fa-check-circle green"></i>') %>
+                <p>Terminé
+                <i class="fas fa-check-circle green"></i></p>
               <% when "initiated" then %>
-                <%= raw('Non terminé <i class="fas fa-check-circle orange"></i>') %>
+                <p>Non terminé
+                <i class="fas fa-hourglass-half orange"></i></p>
               <% when "uninitiated" then %>
-                <%= raw('Non commencé <i class="fas fa-times-circle red"></i>') %>
+                <p>À créer
+                <i class="fas fa-times-circle red"></i></p>
             <% end %>
           </div>
       </div>

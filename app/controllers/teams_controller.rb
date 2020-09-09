@@ -60,8 +60,9 @@ class TeamsController < ApplicationController
 
   def destroy
     date = @team.calendar
+    season = @team.calendar.season
     @team.destroy
-    redirect_to calendar_path(date.id)
+    redirect_to season_calendar_path(season, date)
   end
 
   def index
