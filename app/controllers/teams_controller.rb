@@ -35,14 +35,17 @@ class TeamsController < ApplicationController
     @team_lifeguards = TeamLifeguard.where(team: @team)
     @beach = @team.beach
     @date = @team.calendar
+    @season = @team.season
     teams_on_that_day = @date.teams
 
     @available_arms = look_for_available_armlifeguard(teams_on_that_day, @date)
     @available_heads = look_for_available_headlifeguard(teams_on_that_day, @date)
+
     @team.lifeguards.each do |team_mate|
       @available_arms << team_mate
     end
-    @available_heads << @team.head.first
+
+    @available_heads << @team.head_lifeguard.first
     @team_mate_number = @beach.number_of_team_members - 1
   end
 
@@ -51,9 +54,8 @@ class TeamsController < ApplicationController
     @beach = @team.beach = Beach.find(params[:beach_id])
     puts team_params
     if @team.update(team_params)
-      redirect_to calendar_path(@team.calendar)
+      redirect_to season_calendar_path(@team.calendar.season, @team.calendar)
     else
-      @team.team_lifeguards.new unless @team.team_lifeguards.any?
       render :edit
     end
   end
