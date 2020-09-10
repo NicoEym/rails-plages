@@ -2,11 +2,13 @@ class SeasonsController < ApplicationController
   before_action :set_season, only: [:show, :edit, :update, :destroy]
 
   def new
+    # we create and authorize the new season
     @season = Season.new
     authorize @season
   end
 
   def create
+    # we create a new season using the parameters
     @season = Season.new(season_params)
     authorize @season
     if @season.save
@@ -21,11 +23,13 @@ class SeasonsController < ApplicationController
   end
 
   def index
+    # we display all the season
     @seasons = policy_scope(Season)
     @season = Season.new
   end
 
   def show
+    # we show all the dates in the season
     @dates = @season.calendars
   end
 
