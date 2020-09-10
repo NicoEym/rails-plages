@@ -3,26 +3,35 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:edit, :update, :destroy]
 
   def new
+    # we define all the params that will be used in the form
     @date = Calendar.find(params[:calendar_id])
     @season = @date.season
     @beach = Beach.find(params[:beach_id])
     @team = Team.new
+
+    # we check the authorization
     authorize @team
-    teams_on_that_day = @date.teams
-    # We will load all the unaffected team mates
-    @available_arms = look_for_available_armlifeguard(teams_on_that_day, @date)
-    # We will load all the unaffected head lifeguards
-    @available_heads = look_for_available_headlifeguard(teams_on_that_day, @date)
+
+    # we get the available lifeguards for this date: @available_arms and @available_heads
+    get_available_lifeguards(@date)
+
+    # we build the team_lifeguards for the form
     (@beach.number_of_team_members).times { @team.team_lifeguards.build }
+
+    # the variable below will be used to  build the form
     @team_mate_number = @beach.number_of_team_members - 1
   end
 
   def create
+    # we create our new team using the params and go through the authorization
     @team = Team.new(team_params)
     authorize @team
 
+    # we affect the calendar and the beach since they are not coming in the team_params
     @team.calendar = Calendar.find(params[:calendar_id])
     @team.beach = Beach.find(params[:beach_id])
+
+    # we save our team
     if @team.save
       redirect_to season_calendar_path(@team.calendar.season, @team.calendar)
     else
@@ -32,26 +41,26 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    # we load the team_lifeguards that belong to this team
     @team_lifeguards = TeamLifeguard.where(team: @team)
-    @beach = @team.beach
-    @date = @team.calendar
-    @season = @team.season
-    teams_on_that_day = @date.teams
 
-    @available_arms = look_for_available_armlifeguard(teams_on_that_day, @date)
-    @available_heads = look_for_available_headlifeguard(teams_on_that_day, @date)
+    # we get the available lifeguards for this date: @available_arms and @available_heads
+    get_available_lifeguards(@date)
 
+    # we put current team lifeguards in the array because, since they are already affected to a team (this team)...
+    # ... they have not been found by the method look_for_available_armlifeguard
     @team.lifeguards.each do |team_mate|
       @available_arms << team_mate
     end
 
+    # same logic for the head lifeguard
     @available_heads << @team.head_lifeguard.first
+
+    # the variable below will be used to  build the form
     @team_mate_number = @beach.number_of_team_members - 1
   end
 
   def update
-    @date = @team.calendar
-    @beach = @team.beach = Beach.find(params[:beach_id])
     puts team_params
     if @team.update(team_params)
       redirect_to season_calendar_path(@team.calendar.season, @team.calendar)
@@ -61,10 +70,9 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    date = @team.calendar
-    season = @team.calendar.season
+    # after passing by the we destroy the team and redirect
     @team.destroy
-    redirect_to season_calendar_path(season, date)
+    redirect_to season_calendar_path(@season, @date)
   end
 
   def index
@@ -93,6 +101,7 @@ class TeamsController < ApplicationController
   private
 
   def is_working_on_that_day?(date, teams)
+    # we check whether the user is affected to a team that will work of that date
     team = teams.find_by(calendar_id: date.id)
     team.nil? ? false : true
   end
@@ -100,6 +109,19 @@ class TeamsController < ApplicationController
   def set_team
     @team = Team.find(params[:id])
     authorize @team
+     # we affect some variable that are used in the form
+    @beach = @team.beach
+    @date = @team.calendar
+    @season = @team.season
+  end
+
+  def get_available_lifeguards(date)
+    # we get all the teams already created on this day
+    teams_on_that_day = date.teams
+    # We will load all the unaffected team mates
+    @available_arms = look_for_available_armlifeguard(teams_on_that_day, date)
+    # We will load all the unaffected head lifeguards
+    @available_heads = look_for_available_headlifeguard(teams_on_that_day, date)
   end
 
   def look_for_available_headlifeguard(every_team_on_that_day, date)
