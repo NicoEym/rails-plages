@@ -1,7 +1,9 @@
 <br>
   <div class="container">
     <% if @user_program_for_the_next_7_days.empty? %>
-     <p> Vous n'avez pas de plages prévues.</p>
+      <div class="row justify-center">
+        <p> Vous n'avez pas de plages prévues dans les 7 prochains jours.</p>
+      </div>
     <% else %>
       <%= render 'shared/cardmyteams', team: @user_program_for_the_next_7_days %>
     <% end %>
