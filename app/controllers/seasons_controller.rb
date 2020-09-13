@@ -38,7 +38,9 @@ class SeasonsController < ApplicationController
 
   def update
     if @season.update(season_params)
-
+      for day in @season.start_date..@season.end_date
+        Calendar.create(day: day, season: @season) if Calendar.find_by(day: day, season: @season).nil?
+      end
       redirect_to season_path(@season)
     else
       render :edit
