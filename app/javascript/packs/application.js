@@ -31,6 +31,18 @@ import { addLifeguardsToTeam } from '../components/add_lifeguards_to_team';
 import { enableButtonSubmit } from '../components/enable_button_submit';
 // import { initSelect2 } from '../components/init_select2';
 import { initMapbox } from '../plugins/init_mapbox';
+import { initSweetalert } from '../plugins/init_sweetalert';
+
+initSweetalert('#sweet-alert-demo', {
+  title: "Are you sure?",
+  text: "This action cannot be reversed",
+  icon: "warning"
+}, (value) => {
+  if (value) {
+    const link = document.querySelector('#delete-link');
+    link.click();
+  }
+});
 
 
 document.addEventListener('turbolinks:load', () => {
