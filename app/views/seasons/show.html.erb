@@ -7,6 +7,9 @@
     <% if policy(@season).update? %>
         <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les dates</button>'), edit_season_path(@season) %>
       <% end %>
+      <% if policy(@season).destroy? %>
+         <%= link_to raw('<button type="button" id="sweet-alert-demo" class="btn btn-danger">Supprimer cette saison</button>'), season_path(@season), method: :delete %>
+      <% end %>
 
   </div>
 <br>
