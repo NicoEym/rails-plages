@@ -8,8 +8,10 @@
         <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier les dates</button>'), edit_season_path(@season) %>
       <% end %>
       <% if policy(@season).destroy? %>
-         <%= link_to raw('<button type="button" id="sweet-alert-demo" class="btn btn-danger">Supprimer cette saison</button>'), season_path(@season), method: :delete %>
+         <button type="button" id="sweet-alert-season" class="btn btn-danger">Supprimer la saison</button>
+         <%= link_to "", season_path(@season), method: :delete, id: "delete-link", class: "hidden" %>
       <% end %>
+
 
   </div>
 <br>
