@@ -104,3 +104,9 @@ a { color: inherit;
 .marginb {
   margin-bottom: 1em;
 }
+
+.hidden {
+   position: absolute !important;
+   top: -9999px !important;
+   left: -9999px !important;
+}

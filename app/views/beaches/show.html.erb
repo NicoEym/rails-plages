@@ -20,7 +20,8 @@
         <%= link_to raw('<button type="button" class="btn btn-secondary">Modifier cette plage</button>'), edit_beach_path(@beach) %>
       <% end %>
       <% if policy(@beach).destroy? %>
-         <%= link_to raw('<button type="button" id="sweet-alert-demo" class="btn btn-danger">Supprimer la plage</button>'), beach_path(@beach), method: :delete %>
+         <button type="button" id="sweet-alert-beach" class="btn btn-danger">Supprimer la plage</button>
+         <%= link_to "", beach_path(@beach), method: :delete, id: "delete-link", class: "hidden" %>
       <% end %>
     </div>
 

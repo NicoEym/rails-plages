@@ -33,16 +33,7 @@ import { enableButtonSubmit } from '../components/enable_button_submit';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initSweetalert } from '../plugins/init_sweetalert';
 
-initSweetalert('#sweet-alert-demo', {
-  title: "Êtes vous sûr(e) de vouloir supprimer cette saison ?",
-  text: "Cette action va supprimer les jours, les équipes, les sauveteurs et leurs dispo. Cette action ne pourra pas être annulée.",
-  icon: "warning"
-}, (value) => {
-  if (value) {
-    const link = document.querySelector('#delete-link');
-    link.click();
-  }
-});
+
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -50,6 +41,28 @@ document.addEventListener('turbolinks:load', () => {
 
   initMapbox();
   enableButtonSubmit();
+  initSweetalert('#sweet-alert-season', {
+  title: "Êtes vous sûr(e) de vouloir supprimer cette saison ?",
+  text: "Cette action va supprimer les jours, les équipes, les sauveteurs et leurs dispo. Cette action ne pourra pas être annulée.",
+  icon: "warning"
+    }, (value) => {
+      if (value) {
+        const link = document.querySelector('#delete-link');
+        link.click();
+      }
+  });
+
+
+   initSweetalert('#sweet-alert-beach', {
+  title: "Êtes vous sûr(e) de vouloir supprimer cette plage ?",
+  text: "Cette action va supprimer la plage et les équipes qui y travaillent. Cette action ne pourra pas être annulée.",
+  icon: "warning"
+    }, (value) => {
+      if (value) {
+        const link = document.querySelector('#delete-link');
+        link.click();
+      }
+  });
 });
 
 
