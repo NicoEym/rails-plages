@@ -34,8 +34,8 @@ import { initMapbox } from '../plugins/init_mapbox';
 import { initSweetalert } from '../plugins/init_sweetalert';
 
 initSweetalert('#sweet-alert-demo', {
-  title: "Are you sure?",
-  text: "This action cannot be reversed",
+  title: "Êtes vous sûr(e) de vouloir supprimer cette saison ?",
+  text: "Cette action va supprimer les jours, les équipes, les sauveteurs et leurs dispo. Cette action ne pourra pas être annulée.",
   icon: "warning"
 }, (value) => {
   if (value) {

@@ -1,7 +1,7 @@
 class Calendar < ApplicationRecord
   validates :day, presence: true
   belongs_to :season
-  has_many :teams
+  has_many :teams, dependent: :destroy
   has_many :availabilities
 
   def status
