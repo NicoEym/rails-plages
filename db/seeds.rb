@@ -9,7 +9,13 @@ Lifeguard.delete_all
 # Beach.delete_all
 User.delete_all
 
-season = Season.first
+season = Season.new(name: "Menton RCM 2021", start_date: Date.new(2021, 07, 01), end_date: Date.new(2021, 08, 31))
+season.save!
+
+for day in season.start_date..season.end_date
+  new_date = Calendar.new(day: day, season: season)
+  new_date.save
+end
 
 calendars = season.calendars
 availabilities = []

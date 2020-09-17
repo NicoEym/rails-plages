@@ -9,7 +9,7 @@
       <% end %>
       <% if policy(@season).destroy? %>
          <button type="button" id="sweet-alert-season" class="btn btn-danger">Supprimer la saison</button>
-         <%= link_to "", season_path(@season), method: :delete, id: "delete-link", class: "hidden" %>
+         <%= link_to "", season_path(@season), method: :delete, id: "delete-link", class: "hidden-style" %>
       <% end %>
 
 

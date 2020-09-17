@@ -21,7 +21,7 @@
       <% end %>
       <% if policy(@beach).destroy? %>
          <button type="button" id="sweet-alert-beach" class="btn btn-danger">Supprimer la plage</button>
-         <%= link_to "", beach_path(@beach), method: :delete, id: "delete-link", class: "hidden" %>
+         <%= link_to "", beach_path(@beach), method: :delete, id: "delete-link", class: "hidden-style" %>
       <% end %>
     </div>
 

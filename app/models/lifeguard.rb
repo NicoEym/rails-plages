@@ -3,7 +3,7 @@ class Lifeguard < ApplicationRecord
   belongs_to :season
   has_many :team_lifeguards, dependent: :destroy
   has_many :teams, through: :team_lifeguards
-  has_many :availabilities
+  has_many :availabilities, dependent: :destroy
   accepts_nested_attributes_for :availabilities, allow_destroy: true, reject_if: proc { |attributes| attributes['available'].blank? }
 
 
