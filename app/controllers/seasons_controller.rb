@@ -12,6 +12,7 @@ class SeasonsController < ApplicationController
     @season = Season.new(season_params)
     authorize @season
     if @season.save
+      # for each date between the start date and the end date we are creating a Calendar object (a Date)
       for day in @season.start_date..@season.end_date
         new_date = Calendar.new(day: day, season: @season)
         new_date.save
@@ -38,9 +39,10 @@ class SeasonsController < ApplicationController
 
   def update
     if @season.update(season_params)
-      for day in @season.start_date..@season.end_date
-        Calendar.create(day: day, season: @season) if Calendar.find_by(day: day, season: @season).nil?
-      end
+      # first we will delete all the dates that not longer belong to the season
+      delete_season_days
+      # then we will create all the new dates
+      create_new_season_days
       redirect_to season_path(@season)
     else
       render :edit
@@ -53,6 +55,19 @@ class SeasonsController < ApplicationController
   end
 
   private
+
+  def delete_season_days
+    all_season_dates = @season.calendars
+    all_season_dates.each do |date|
+      date.destroy if date.day < @season.start_date || date.day > @season.end_date
+    end
+  end
+
+  def create_new_season_days
+    for day in @season.start_date..@season.end_date
+        Calendar.create(day: day, season: @season) if Calendar.find_by(day: day, season: @season).nil?
+    end
+  end
 
   def set_season
     @season = Season.find(params[:id])
