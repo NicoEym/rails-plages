@@ -18,6 +18,9 @@
       <% end %>
     </div>
 
+    <% if current_user.admin && @lifeguard.availabilities.count > 0 %>
+         <%= link_to raw('<button type="button" class="btn btn-primary">Valider ce sauveteur !</button>'), edit_user_lifeguard_path(@user, @lifeguard) %>
+    <% end %>
     <br>
     <br>
 
@@ -45,7 +48,7 @@
             <h3><u>Diplômes:</u></h3>
             <h3>BNSSA ? <%= @user.lifeguard.bnssa? %></h3>
             <h3>PSE 1 ? <%= @user.lifeguard.pse1? %></h3>
-            <h3>PSE 2? <%= @user.lifeguard.pse2? %></h3>
+            <h3>PSE 2 ? <%= @user.lifeguard.pse2? %></h3>
           </div>
           <br>
 
