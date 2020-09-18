@@ -14,7 +14,8 @@
       <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
       <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>
       <% if current_user.admin %>
-        <%= f.input :head, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false, label: "Chef de poste?" %>
+        <%= f.input :validated_by_admin, as: :boolean, boolean_style: :inline, checked_value: false, unchecked_value: true, label: "Tout est OK pour travailler ?" %>
+        <%= f.input :head, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false, label: "Le sauveteur sera chef de poste?" %>
       <% end %>
 
       <% for i in 0..@number_of_days %>
