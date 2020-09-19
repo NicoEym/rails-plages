@@ -1,5 +1,5 @@
 meta_product_name: "Mitch"
 meta_title: "Mitch - Ton planning des plages dans ta poche"
-meta_description: "Mitch t'aider à créer ton planning sur les plages et permet à tes sauveteurs de toujours savoir où ils travaillent."
+meta_description: "Mitch t'aide à créer ton planning sur les plages et permet à tes sauveteurs de toujours savoir où ils travaillent."
 meta_image: "menton.png" # should exist in `app/assets/images/`
 twitter_account: "@product_twitter_account"   # required for Twitter Cards
