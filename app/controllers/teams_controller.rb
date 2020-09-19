@@ -77,10 +77,12 @@ class TeamsController < ApplicationController
 
   def index
     @user_affected_teams = policy_scope(Team)
-    today = Date.today
+    # short method to identify the references date of the index for the user
+    reference_date = find_reference_date
+
     @user_program_for_the_next_7_days = []
     for i in 0..6
-      date = today + i
+      date = reference_date + i
       date_for_test = Calendar.find_by(day: date)
       unless date_for_test.nil?
         # // for this date, if we have less team created than number of beaches, the plaaning has not been finalized yet
@@ -99,6 +101,11 @@ class TeamsController < ApplicationController
   end
 
   private
+
+  def find_reference_date
+    reference_date = Date.today
+    reference_date = current_user.lifeguard.season.start_date if reference_date < current_user.lifeguard.season.start_date
+  end
 
   def is_working_on_that_day?(date, teams)
     # we check whether the user is affected to a team that will work of that date
