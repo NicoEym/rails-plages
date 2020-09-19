@@ -10,21 +10,27 @@
        <%= f.input :user_id, collection: [@user], selected: @user, label_method: :full_name, input_html: { readonly: true}, label: "Profil:" %>
       <%= f.input :season_id, collection: [@season], selected: @season, label_method: :name, :input_html => {  readonly: true }, label: "Saison:" %>
 
-      <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon BNSSA ?" %>
-      <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE1 ?" %>
-      <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "J'ai mon PSE2 ?" %>
+      <h5><u>Diplômes:</u></h5>
+      <%= f.input :bnssa, as: :boolean, checked_value: true, unchecked_value: false, label: "BNSSA validé ?" %>
+      <%= f.input :pse1, as: :boolean, checked_value: true, unchecked_value: false, label: "PSE1 validé ?" %>
+      <%= f.input :pse2, as: :boolean, checked_value: true, unchecked_value: false, label: "PSE2 validé ?" %>
+
       <% if current_user.admin %>
-        <%= f.input :validated_by_admin, as: :boolean, boolean_style: :inline, checked_value: false, unchecked_value: true, label: "Tout est OK pour travailler ?" %>
-        <%= f.input :head, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false, label: "Le sauveteur sera chef de poste?" %>
+        <h5><u>Validations administrateur:</u></h5>
+        <%= f.input :validated_by_admin, as: :boolean, boolean_style: :inline, checked_value: false, unchecked_value: true, label: "Tout est OK pour travailler." %>
+        <%= f.input :head, as: :boolean, boolean_style: :inline, checked_value: true, unchecked_value: false, label: "Le sauveteur sera chef de poste." %>
       <% end %>
 
-      <% for i in 0..@number_of_days %>
+      <% unless current_user.admin %>
+        <h5><u>Dispos:</u></h5>
+        <% for i in 0..@number_of_days %>
 
-        <%= f.fields_for :availabilities, @lifeguard.availabilities[i] do |ff| %>
-          <%= ff.input :calendar_id, :as => :hidden, collection: [@lifeguard.availabilities[i].calendar], selected: @lifeguard.availabilities[i].calendar, label_method: :day, input_html: { readonly: true}, input_html: { autocomplete: "Perfil"}, label: "Je suis dispo pour travailler le #{@lifeguard.availabilities[i].calendar.day.strftime('%d-%m-%Y')}?" %>
-          <%= ff.input_field :available, calendar_id: @lifeguard.availabilities[i].calendar.id, as: :radio_buttons, prompt: "Choisir", input_html: { autocomplete: "Perfil"}, label: false %>
-          <br>
+          <%= f.fields_for :availabilities, @lifeguard.availabilities[i] do |ff| %>
+            <%= ff.input :calendar_id, :as => :hidden, collection: [@lifeguard.availabilities[i].calendar], selected: @lifeguard.availabilities[i].calendar, label_method: :day, input_html: { readonly: true}, input_html: { autocomplete: "Perfil"}, label: "Je suis dispo pour travailler le #{@lifeguard.availabilities[i].calendar.day.strftime('%d-%m-%Y')}?" %>
+            <%= ff.input_field :available, calendar_id: @lifeguard.availabilities[i].calendar.id, as: :radio_buttons, prompt: "Choisir", input_html: { autocomplete: "Perfil"}, label: false %>
+            <br>
 
+          <% end %>
         <% end %>
       <% end %>
 
