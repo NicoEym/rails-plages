@@ -33,7 +33,7 @@ class LifeguardPolicy < ApplicationPolicy
   private
 
   def user_is_admin?
-    @record.user.admin?
+    user.admin?
   end
 
   def user_profile_or_user_is_admin?

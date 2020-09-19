@@ -12,11 +12,11 @@ class Lifeguard < ApplicationRecord
   end
 
   def self.head_lifeguards_all
-    where(head: true)
+    where(validated_by_admin: true, head: true)
   end
 
   def self.arm_lifeguards_all
-    where(head: false)
+    where(validated_by_admin: true, head: false)
   end
 
   def self.available_on_that_date(date)
